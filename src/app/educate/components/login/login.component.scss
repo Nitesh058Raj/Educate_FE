@@ -1,0 +1,76 @@
+.login-container {
+  height: 100vh;
+  width: auto;
+  background-color: #268aff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .white-container {
+    height: 512px;
+    width: 512px;
+    background-color: #ffffff;
+    border-radius: 10px;
+
+    .login-header {
+      font-family: "Lexend Giga";
+      font-size: 48px;
+      text-align: center;
+      margin: 30px 115px;
+    }
+
+    .login-horizontal-line {
+      height: 1px;
+      background-color: #000000;
+      border: none;
+    }
+
+    .login-content {
+      padding: 30px 48px;
+      font-family: "Karla";
+      font-size: 24px;
+
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .input {
+        height: 40px;
+        width: 396px;
+        padding: 2px 0 2px 20px;
+        margin-top: 10px;
+        font-size: 24px;
+        border: 1px solid black;
+        border-radius: 5px;
+        font-family: "Karla";
+      }
+
+      .login-forgot-text {
+        cursor: pointer;
+        color: #268aff;
+      }
+
+      .login-forgot-text:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .login-button {
+      width: 416px;
+      height: 60px;
+      margin: 2px 48px 30px 48px;
+      font-family: "Lexend Giga";
+      font-size: 24px;
+      border: none;
+      border-radius: 5px;
+      color: #ffffff;
+      background-color: #268aff;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
