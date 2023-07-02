@@ -1,0 +1,15 @@
+.header-container {
+  height: 92px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  align-items: center;
+
+  .header-title {
+    font-size: 48px;
+    padding-left: 32px;
+    font-family: "Lexend Giga";
+    line-height: normal;
+  }
+}
