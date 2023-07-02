@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LoginComponent } from './components/login/login.component';
+import { SharedModule } from '../shared/shared.module';
 import { EducateTeacherComponent } from './educate-teacher.component';
 
 @NgModule({
-  declarations: [EducateTeacherComponent, LoginComponent],
-  imports: [CommonModule],
+  declarations: [EducateTeacherComponent],
+  imports: [CommonModule, SharedModule],
   exports: [EducateTeacherComponent],
 })
 export class EducateTeacherModule {}
