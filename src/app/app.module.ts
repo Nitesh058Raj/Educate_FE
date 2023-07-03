@@ -3,11 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EducateModule } from './educate/educate.module';
+import { EducateTeacherModule } from './educate-teacher/educate-teacher.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, EducateModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    EducateTeacherModule,
+    SharedModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
