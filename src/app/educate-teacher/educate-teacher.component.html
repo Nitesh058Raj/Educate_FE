@@ -1,1 +1,6 @@
 <app-header></app-header>
+<app-sidebar
+  [itemList]="itemList"
+  [activeTab]="activeTab"
+  (selectedSidebarItem)="navigateToSelectedTab($event)"
+></app-sidebar>
