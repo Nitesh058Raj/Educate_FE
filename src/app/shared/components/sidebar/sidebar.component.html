@@ -1,18 +1,20 @@
-<nav aria-label="side navigation">
-  <ul>
-    <li *ngFor="let item of itemList">
-      <button
-        [attr.class]="
-          [
-            'side-item',
-            item.title === this.activeTab && 'side-item-active'
-          ].join(' ')
-        "
-        [attr.aria-current]="item === this.activeItem ? 'true' : null"
-        (click)="pressItem(item)"
-      >
-        <span class="button-label">{{ item.title }}</span>
-      </button>
-    </li>
-  </ul>
-</nav>
+<div class="sidebar-container">
+  <nav>
+    <ul>
+      <li *ngFor="let item of itemList">
+        <button
+          [attr.class]="
+            [
+              'side-item',
+              item.title === this.activeTab && 'side-item-active'
+            ].join(' ')
+          "
+          [attr.aria-current]="item === this.activeItem ? 'true' : null"
+          (click)="pressItem(item)"
+        >
+          <span class="button-label">{{ item.title }}</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
