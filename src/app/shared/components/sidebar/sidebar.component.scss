@@ -1,0 +1,53 @@
+nav,
+ul {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+li {
+  list-style: none;
+  margin: 0px;
+
+  // below styles will not apply to the last <li>
+  &:not(:last-child) {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+.side-item {
+  height: 74px;
+  width: 350px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  font-family: "Karla";
+  font-size: 32px;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+  outline: inherit;
+  white-space: normal;
+
+  .button-label {
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+  }
+}
+
+.side-item:focus {
+  z-index: 1;
+}
+
+.side-item:hover {
+  background-color: #f1f1f1;
+}
+
+.side-item-active {
+  color: white;
+  background-color: #268aff;
+}
+
+.side-item-active:hover {
+  background-color: #2150a3;
+}
