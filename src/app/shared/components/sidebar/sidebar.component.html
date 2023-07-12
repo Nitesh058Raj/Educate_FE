@@ -6,7 +6,7 @@
           [attr.class]="
             [
               'side-item',
-              item.title === this.activeTab && 'side-item-active'
+              item.label === this.activeTab && 'side-item-active'
             ].join(' ')
           "
           [attr.aria-current]="item === this.activeItem ? 'true' : null"

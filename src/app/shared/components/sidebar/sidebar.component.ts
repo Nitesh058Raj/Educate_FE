@@ -7,7 +7,7 @@ import { SideBarItemInterface } from 'src/app/models/common.model';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  @Output() selectedSidebarItem = new EventEmitter<string>();
+  @Output() selectedSidebarItem = new EventEmitter<SideBarItemInterface>();
   @Input() itemList: SideBarItemInterface[] = [];
   @Input() activeTab: string = '';
   activeItem!: SideBarItemInterface;
@@ -16,13 +16,13 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.activeItem =
-      this.itemList.filter((item) => item.title === this.activeTab)[0] ||
+      this.itemList.filter((item) => item.label === this.activeTab)[0] ||
       this.activeItem;
   }
 
   pressItem(item: SideBarItemInterface): void {
     this.activeItem = item;
-    this.activeTab = item.title;
-    this.selectedSidebarItem.emit(this.activeTab);
+    this.activeTab = item.label;
+    this.selectedSidebarItem.emit(this.activeItem);
   }
 }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EducateTeacher } from '../constants/educate-teacher.constant';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  EducateTeacher,
+  EducateTeacherRoutes,
+} from '../constants/educate-teacher.constant';
 import { SideBarItemInterface } from '../models/common.model';
 
 @Component({
@@ -8,33 +12,34 @@ import { SideBarItemInterface } from '../models/common.model';
   styleUrls: ['./educate-teacher.component.scss'],
 })
 export class EducateTeacherComponent implements OnInit {
-  activeTab: string = 'Dashboard';
+  activeTab: string = 'dashboard';
   itemList: SideBarItemInterface[] = [
     {
       title: EducateTeacher.DASHBOARD,
-      label: 'dashboard',
+      label: EducateTeacherRoutes.DASHBOARD,
     },
     {
       title: EducateTeacher.MY_CLASSES,
-      label: 'my-classes',
+      label: EducateTeacherRoutes.MY_CLASSES,
     },
     {
       title: EducateTeacher.ASSIGNMENTS,
-      label: 'assignments',
+      label: EducateTeacherRoutes.ASSIGNMENTS,
     },
     {
       title: EducateTeacher.HELP_AND_SUPPORT,
-      label: 'h&s',
+      label: EducateTeacherRoutes.HELP_AND_SUPPORT,
     },
   ];
 
-  constructor() {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activeTab = this.router.url.split('/')[2] || 'dashboard';
+  }
 
-  navigateToSelectedTab(value: string) {
-    console.log('Navigating to: ', value);
-    this.activeTab = value;
-    // TODO: Write code to change route to the selected tab
+  navigateToSelectedTab(value: SideBarItemInterface) {
+    this.activeTab = value.label;
+    this.router.navigate([value.label], { relativeTo: this.route });
   }
 }
