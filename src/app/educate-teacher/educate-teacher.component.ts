@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EducateTeacher } from '../constants/educate-teacher.constant';
 import { SideBarItemInterface } from '../models/common.model';
 
 @Component({
@@ -10,16 +11,20 @@ export class EducateTeacherComponent implements OnInit {
   activeTab: string = 'Dashboard';
   itemList: SideBarItemInterface[] = [
     {
-      title: 'Dashboard',
+      title: EducateTeacher.DASHBOARD,
       label: 'dashboard',
     },
     {
-      title: 'My Classes',
+      title: EducateTeacher.MY_CLASSES,
       label: 'my-classes',
     },
     {
-      title: 'Assignments',
+      title: EducateTeacher.ASSIGNMENTS,
       label: 'assignments',
+    },
+    {
+      title: EducateTeacher.HELP_AND_SUPPORT,
+      label: 'h&s',
     },
   ];
 
