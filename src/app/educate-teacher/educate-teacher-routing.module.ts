@@ -5,18 +5,22 @@ import {
   EducateTeacherRoutes,
 } from '../constants/educate-teacher.constant';
 import { EducateTeacherComponent } from './educate-teacher.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MyClassesComponent } from './my-classes/my-classes.component';
+import { HelpAndSupportsComponent } from './help-and-supports/help-and-supports.component';
+import { AssignmentsComponent } from './assignments/assignments.component';
 
 const childRoutes: Routes = [
   { path: '', redirectTo: EducateTeacher.EDUCATE_TEACHER, pathMatch: 'full' },
-  { path: EducateTeacherRoutes.DASHBOARD, component: EducateTeacherComponent },
-  { path: EducateTeacherRoutes.MY_CLASSES, component: EducateTeacherComponent },
+  { path: EducateTeacherRoutes.DASHBOARD, component: DashboardComponent },
+  { path: EducateTeacherRoutes.MY_CLASSES, component: MyClassesComponent },
   {
     path: EducateTeacherRoutes.ASSIGNMENTS,
-    component: EducateTeacherComponent,
+    component: AssignmentsComponent,
   },
   {
     path: EducateTeacherRoutes.HELP_AND_SUPPORT,
-    component: EducateTeacherComponent,
+    component: HelpAndSupportsComponent,
   },
   { path: '**', redirectTo: EducateTeacher.EDUCATE_TEACHER },
 ];
