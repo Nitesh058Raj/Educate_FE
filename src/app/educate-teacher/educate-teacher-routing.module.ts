@@ -1,17 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  EducateTeacher,
-  EducateTeacherRoutes,
-} from '../constants/educate-teacher.constant';
-import { EducateTeacherComponent } from './educate-teacher.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { MyClassesComponent } from './my-classes/my-classes.component';
-import { HelpAndSupportsComponent } from './help-and-supports/help-and-supports.component';
+import { EducateTeacherRoutes } from '../constants/educate-teacher.constant';
 import { AssignmentsComponent } from './assignments/assignments.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EducateTeacherComponent } from './educate-teacher.component';
+import { HelpAndSupportsComponent } from './help-and-supports/help-and-supports.component';
+import { MyClassesComponent } from './my-classes/my-classes.component';
 
 const childRoutes: Routes = [
-  { path: '', redirectTo: EducateTeacher.EDUCATE_TEACHER, pathMatch: 'full' },
+  { path: '', redirectTo: EducateTeacherRoutes.DASHBOARD, pathMatch: 'full' },
   { path: EducateTeacherRoutes.DASHBOARD, component: DashboardComponent },
   { path: EducateTeacherRoutes.MY_CLASSES, component: MyClassesComponent },
   {
@@ -22,7 +19,7 @@ const childRoutes: Routes = [
     path: EducateTeacherRoutes.HELP_AND_SUPPORT,
     component: HelpAndSupportsComponent,
   },
-  { path: '**', redirectTo: EducateTeacher.EDUCATE_TEACHER },
+  { path: '**', redirectTo: EducateTeacherRoutes.DASHBOARD },
 ];
 
 const routes: Routes = [
