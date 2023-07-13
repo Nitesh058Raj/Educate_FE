@@ -1,0 +1,40 @@
+.school-details-container {
+  .school-details-body {
+    display: flex;
+    flex-direction: column;
+
+    .detail-row {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 33px;
+
+      .label {
+        width: 232px;
+        font-weight: bold;
+        display: inline-block;
+        padding-left: 32px;
+        color: #000;
+        font-family: "Karla";
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+
+      .value {
+        color: #000;
+        font-family: "Karla";
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        max-width: 450px; /* Set a maximum width for the value text */
+        word-wrap: break-word;
+      }
+    }
+
+    .detail-row:last-child {
+      margin-bottom: 0; /* Remove bottom margin for the last row */
+    }
+  }
+}
