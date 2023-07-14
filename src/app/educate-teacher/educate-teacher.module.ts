@@ -8,6 +8,7 @@ import { EducateTeacherRoutingModule } from './educate-teacher-routing.module';
 import { EducateTeacherComponent } from './educate-teacher.component';
 import { HelpAndSupportsComponent } from './help-and-supports/help-and-supports.component';
 import { MyClassesComponent } from './my-classes/my-classes.component';
+import { MyClassesModule } from './my-classes/my-classes.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MyClassesComponent } from './my-classes/my-classes.component';
     CommonModule,
     SharedModule,
     DashboardModule,
+    MyClassesModule,
   ],
   exports: [EducateTeacherComponent],
 })

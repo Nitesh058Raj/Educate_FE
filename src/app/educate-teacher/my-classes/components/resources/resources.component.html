@@ -1,0 +1,12 @@
+<div class="resources-container" appCardStyle>
+  <div class="resources-header" appCardHeaderStyle>Resources</div>
+  <div class="resources-body" appCardBodyStyle>
+    <div class="resources" *ngIf="resources; else NotAvailable">
+      {{ resources }}
+    </div>
+
+    <ng-template #NotAvailable>
+      <p class="not-availble">No resources available</p>
+    </ng-template>
+  </div>
+</div>
