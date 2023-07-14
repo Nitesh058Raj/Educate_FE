@@ -1,0 +1,28 @@
+<div class="class-roster-container" appCardStyle>
+  <div class="class-roster-header" appCardHeaderStyle>Class Roster</div>
+  <div class="class-roster-body" appCardBodyStyle>
+    <div class="buttons">
+      <button class="btn add">Add</button>
+      <button class="btn remove">Remove</button>
+    </div>
+
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Student Name</th>
+          <th>Student Email</th>
+          <th>Contact Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of studentDetails; let id = index">
+          <td class="id">{{ student.id }}</td>
+          <td class="name">{{ student.name }}</td>
+          <td class="email">{{ student.email }}</td>
+          <td class="contact">{{ student.contact }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
