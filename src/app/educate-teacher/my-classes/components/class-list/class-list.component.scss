@@ -1,21 +1,21 @@
 .class-list-container {
-  max-width: 492px;
-  .class-list-header {
-  }
+
   .class-list-body {
     .list {
+      height: 284px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
       list-style-type: none; /* Remove default bullet points */
-
-      padding-top: 8px; /* 8 + 33(from directive) = 41 */
-      margin-bottom: 16px;
+      padding-top: 8px;
 
       .list-item {
-        margin-right: 92px;
-        margin-left: 92px;
-        margin-bottom: 25px;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 25px;
 
         .list-box {
-          max-width: 308px;
+          width: 308px;
           height: 70px;
           background: #fff;
           box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
@@ -23,18 +23,18 @@
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          cursor: pointer;
 
           .list-text {
             color: #000;
             font-family: "Karla";
             font-size: 32px;
-            font-style: normal;
             font-weight: 500;
-            line-height: normal;
             text-align: center;
           }
         }
       }
+
       .list-item:hover {
         .list-box {
           background: #268aff;
@@ -49,9 +49,6 @@
             line-height: normal;
           }
         }
-      }
-      .list-item:last-child {
-        margin-bottom: 0px;
       }
     }
   }

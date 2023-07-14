@@ -6,7 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./class-list.component.scss'],
 })
 export class ClassListComponent implements OnInit {
-  classes: string[] = ['Mathematics', 'Science', 'Science'];
+  classList: string[] = [
+    'Mathematics',
+    'Science',
+    'Science',
+    'Biology',
+    'Chemistry',
+    'Physics',
+  ];
 
   constructor() {}
 
