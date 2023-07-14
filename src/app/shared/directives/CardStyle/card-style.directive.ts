@@ -8,7 +8,7 @@ export class CardStyleDirective {
 
   @HostBinding('style.margin')
   get margin(): string {
-    return this.appCardStyle || '36px';
+    return this.appCardStyle || '36px 36px 0 36px';
   }
 
   @HostBinding('style.borderRadius')
