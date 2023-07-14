@@ -29,6 +29,6 @@ describe('CardStyleDirective', () => {
   it('should apply the card styles to the element', () => {
     const element: HTMLElement = elementRef.nativeElement;
 
-    expect(element.style.margin).toBe('36px');
+    expect(element.style.margin).toBe('36px 36px 0px');
   });
 });
