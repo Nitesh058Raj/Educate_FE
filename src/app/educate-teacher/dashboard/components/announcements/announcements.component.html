@@ -1,4 +1,14 @@
 <div class="announcements-container" appCardStyle>
   <div class="announcements-header" appCardHeaderStyle>Announcements</div>
-  <div class="announcements-body" appCardBodyStyle></div>
+  <div class="announcements-body" appCardBodyStyle>
+    <div
+      class="announcements-content"
+      *ngIf="isAnnouncementAvailable; else notAvailable"
+    >
+      <!-- TODO: Render content here when available -->
+    </div>
+    <ng-template #notAvailable>
+      <p class="not-availble">No announcements available</p>
+    </ng-template>
+  </div>
 </div>
