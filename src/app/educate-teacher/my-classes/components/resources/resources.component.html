@@ -1,11 +1,13 @@
 <div class="resources-container" appCardStyle>
   <div class="resources-header" appCardHeaderStyle>Resources</div>
   <div class="resources-body" appCardBodyStyle>
-    <div class="resources" *ngIf="resources; else NotAvailable">
-      {{ resources }}
+    <div
+      class="resources-content"
+      *ngIf="isResourceAvailable; else notAvailable"
+    >
+      <!-- TODO: Render content here when available -->
     </div>
-
-    <ng-template #NotAvailable>
+    <ng-template #notAvailable>
       <p class="not-availble">No resources available</p>
     </ng-template>
   </div>
