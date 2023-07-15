@@ -1,0 +1,52 @@
+.assignments-overview-container {
+  .assignments-overview-body {
+    display: flex;
+
+    .dropdown {
+      padding-left: 45px;
+      flex: 2;
+      width: 200px; /* Set the width as needed */
+      position: relative;
+
+      select {
+        padding: 5px 75px 5px 15px;
+        font-size: 24px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        appearance: none;
+      }
+
+      select:focus {
+        outline: none;
+        border-color: #fff;
+        border-radius: 5px;
+        background: #fff;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+        option {
+          border: 1px solid #6e6e6e;
+          background: #eee;
+          border-radius: 0;
+        }
+      }
+
+      .arrow {
+        top: 14px;
+        right: 10px;
+        pointer-events: none;
+      }
+    }
+    .contant {
+      flex: 3;
+      margin-bottom: 41px;
+
+      .contant-row {
+        color: #000;
+        font-family: "Karla";
+        font-size: 32px;
+        font-weight: 500;
+        margin-bottom: 12px;
+      }
+    }
+  }
+}

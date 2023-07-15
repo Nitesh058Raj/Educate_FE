@@ -1,0 +1,29 @@
+<div class="assignments-overview-container" appCardStyle>
+  <div class="assignments-overview-header" appCardHeaderStyle>
+    Assignments Overview
+  </div>
+  <div class="assignments-overview-body" appCardBodyStyle>
+    <!--TODO: DropDown box-->
+    <div class="dropdown">
+      <select>
+        <option>Mathematics</option>
+        <option>English</option>
+        <option>Science</option>
+      </select>
+      <span class="arrow">&#9662;</span>
+    </div>
+    <div class="contant">
+      <div class="contant-row">
+        Active Assignments: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{
+          activeAssignments
+        }}
+      </div>
+      <div class="contant-row">
+        Incoming Assignments: &nbsp;&nbsp;{{ inactiveAssignments }}
+      </div>
+      <div class="contant-row">
+        Average Performance: &nbsp;&nbsp;&nbsp;{{ performance }}
+      </div>
+    </div>
+  </div>
+</div>

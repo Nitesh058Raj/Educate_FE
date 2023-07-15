@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { AssignmentsComponent } from './assignments/assignments.component';
+import { AssignmentsModule } from './assignments/assignments.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { EducateTeacherRoutingModule } from './educate-teacher-routing.module';
@@ -24,6 +25,7 @@ import { MyClassesModule } from './my-classes/my-classes.module';
     SharedModule,
     DashboardModule,
     MyClassesModule,
+    AssignmentsModule,
   ],
   exports: [EducateTeacherComponent],
 })
