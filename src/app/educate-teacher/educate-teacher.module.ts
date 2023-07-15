@@ -8,6 +8,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { EducateTeacherRoutingModule } from './educate-teacher-routing.module';
 import { EducateTeacherComponent } from './educate-teacher.component';
 import { HelpAndSupportsComponent } from './help-and-supports/help-and-supports.component';
+import { HelpAndSupportsModule } from './help-and-supports/help-and-supports.module';
 import { MyClassesComponent } from './my-classes/my-classes.component';
 import { MyClassesModule } from './my-classes/my-classes.module';
 
@@ -26,6 +27,7 @@ import { MyClassesModule } from './my-classes/my-classes.module';
     DashboardModule,
     MyClassesModule,
     AssignmentsModule,
+    HelpAndSupportsModule,
   ],
   exports: [EducateTeacherComponent],
 })
