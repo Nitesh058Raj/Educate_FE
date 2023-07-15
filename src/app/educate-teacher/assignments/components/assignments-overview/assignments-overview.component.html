@@ -3,26 +3,25 @@
     Assignments Overview
   </div>
   <div class="assignments-overview-body" appCardBodyStyle>
-    <!--TODO: DropDown box-->
     <div class="dropdown">
-      <select>
-        <option>Mathematics</option>
-        <option>English</option>
-        <option>Science</option>
+      <select
+        class="dropdown-select"
+        (change)="onDropdownChange()"
+        [(ngModel)]="selectedOption"
+      >
+        <option disabled selected id="placeholder">Select Class</option>
+        <option *ngFor="let option of optionList">{{ option }}</option>
       </select>
-      <span class="arrow">&#9662;</span>
     </div>
     <div class="contant">
       <div class="contant-row">
-        Active Assignments: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{
-          activeAssignments
-        }}
+        Active Assignments: &nbsp; <b>{{ activeAssignments }}</b>
       </div>
       <div class="contant-row">
-        Incoming Assignments: &nbsp;&nbsp;{{ inactiveAssignments }}
+        Incoming Assignments: &nbsp; <b>{{ inactiveAssignments }}</b>
       </div>
       <div class="contant-row">
-        Average Performance: &nbsp;&nbsp;&nbsp;{{ performance }}
+        Average Performance: &nbsp; <b>{{ performance }}</b>
       </div>
     </div>
   </div>
