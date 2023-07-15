@@ -8,9 +8,8 @@ describe('AssignmentsOverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AssignmentsOverviewComponent ]
-    })
-    .compileComponents();
+      declarations: [AssignmentsOverviewComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +20,10 @@ describe('AssignmentsOverviewComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call onDropdownChange', () => {
+    component.onDropdownChange();
+    expect(component.activeAssignments).toEqual(3);
   });
 });
