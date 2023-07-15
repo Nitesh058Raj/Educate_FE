@@ -1,3 +1,5 @@
+$table_border: 1px solid #000;
+
 .class-roster-container {
   .class-roster-header {
   }
@@ -15,11 +17,10 @@
         color: #fff;
         font-family: "Karla";
         font-size: 24px;
-        font-style: normal;
         font-weight: 500;
-        line-height: normal;
         border: none;
         height: 58px;
+        cursor: pointer;
       }
       .add {
         width: 115px;
@@ -34,44 +35,30 @@
       }
     }
 
-    .custom-table {
-      border-collapse: collapse;
-      margin-left: 3.24%;
-      margin-right: 3.24%;
+    .student-details {
+      margin: 33px 33px 0 33px;
+      .custom-table {
+        font-family: "Karla";
+        font-size: 26px;
+        display: flex;
 
-      thead {
-        th {
-          border-bottom: 1px solid #000;
-          border-right: 1px solid #000;
-        }
-        th:last-child {
-          border-right: none;
-        }
-      }
+        .column {
+          flex: 1;
 
-      tbody {
-        td {
-          border-right: 1px solid #000;
-        }
-        td:last-child {
-          border-right: none;
-        }
+          .column-header {
+            font-weight: 700;
+            border-right: $table_border;
+            border-bottom: $table_border;
+          }
 
-        .id {
-          width: 12.48%;
-          text-align: center;
-        }
-
-        .name {
-          width: 26.33%;
-        }
-
-        .email {
-          width: 24.17%;
-        }
-
-        .contact {
-          width: 30.55%;
+          .row {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-all;
+            border-right: $table_border;
+          }
         }
       }
     }
