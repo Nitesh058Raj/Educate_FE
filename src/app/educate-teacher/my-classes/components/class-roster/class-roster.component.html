@@ -1,0 +1,38 @@
+<div class="class-roster-container" appCardStyle="36px">
+  <div class="class-roster-header" appCardHeaderStyle>Class Roster</div>
+  <div class="class-roster-body" appCardBodyStyle>
+    <div class="buttons">
+      <button class="btn add">Add</button>
+      <button class="btn remove">Remove</button>
+    </div>
+    <div class="student-details">
+      <div
+        class="custom-table"
+        *ngFor="let item of studentDetails; let id = index"
+      >
+        <div class="column">
+          <div class="row column-header" *ngIf="id === 0">ID</div>
+          <div class="row">{{ item.id }}</div>
+        </div>
+        <div class="column">
+          <div class="row column-header" *ngIf="id === 0">Name</div>
+          <div class="row">{{ item.name }}</div>
+        </div>
+        <div class="column">
+          <div class="row column-header" *ngIf="id === 0">Email</div>
+          <div class="row">{{ item.email }}</div>
+        </div>
+        <div class="column">
+          <div
+            class="row column-header"
+            style="border-right: 0px"
+            *ngIf="id === 0"
+          >
+            Contact
+          </div>
+          <div class="row" style="border-right: 0px">{{ item.contact }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
