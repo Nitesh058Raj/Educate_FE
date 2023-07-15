@@ -1,10 +1,10 @@
 .contact-details-container {
   .contact-details-header {
     .contact-details-icon {
-      //     align-items: center;
-      padding-top: 12px;
-      padding-bottom: 11px;
       padding-left: 17px;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
     }
   }
   .contact-details-body {
