@@ -1,0 +1,36 @@
+.contact-details-container {
+  .contact-details-header {
+    .contact-details-icon {
+      padding-left: 17px;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+  }
+  .contact-details-body {
+    .detail-row {
+      display: flex;
+      margin-bottom: 18px;
+      margin-left: 32px;
+
+      color: #000;
+      font-family: "Karla";
+      font-size: 24px;
+      font-weight: 500;
+
+      .label {
+        flex: 1;
+      }
+      .conatct {
+        flex: 1;
+      }
+      .email {
+        flex: 1;
+      }
+    }
+
+    .detail-row:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

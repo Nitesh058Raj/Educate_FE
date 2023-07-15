@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./announcements.component.scss'],
 })
 export class AnnouncementsComponent implements OnInit {
+  isAnnouncementAvailable = false;
+
   constructor() {}
 
   ngOnInit(): void {}

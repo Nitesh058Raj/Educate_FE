@@ -1,0 +1,45 @@
+.class-details-container {
+  .class-details-body {
+    display: flex;
+    flex-direction: column;
+
+    .class-name {
+      display: flex;
+      padding-top: 8px;
+      .label {
+        width: 176px;
+      }
+    }
+
+    .detail-row {
+      margin-bottom: 25px;
+
+      .label {
+        font-weight: bold;
+        padding-left: 32px;
+        color: #000;
+        font-family: "Karla";
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      .value {
+        color: #000;
+        font-family: "Karla";
+        font-size: 24px;
+        font-weight: 700;
+        word-wrap: break-word;
+      }
+
+      .class-description {
+        padding-left: 32px;
+        padding-top: 20px;
+        height: 175px;
+      }
+    }
+
+    .detail-row:last-child {
+      margin-bottom: 0; /* Remove bottom margin for the last row */
+    }
+  }
+}
