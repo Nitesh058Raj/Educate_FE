@@ -1,0 +1,14 @@
+<div class="faq-container" appCardStyle>
+  <div class="faq-header" appCardHeaderStyle>FAQ</div>
+  <div class="faq-body" appCardBodyStyle>
+    <div class="question-list" *ngFor="let item of questions">
+      <div class="question">
+        Q. &nbsp;<span>{{ item.question }}</span>
+      </div>
+
+      <div class="answer">
+        A. &nbsp;<span>{{ item.answer }}</span>
+      </div>
+    </div>
+  </div>
+</div>
