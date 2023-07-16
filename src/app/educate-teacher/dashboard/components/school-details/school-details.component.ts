@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EducateTeacherService } from 'src/app/educate-teacher/services/educate-teacher.service';
 
 @Component({
   selector: 'app-school-details',
@@ -6,11 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./school-details.component.scss'],
 })
 export class SchoolDetailsComponent implements OnInit {
-  schoolName: string = 'Mohandas Karamchandra High School';
-  schoolAddr: string =
-    '23/P, Gateway road, Near to old court, Anand, Gujarat [ 388 001 ]';
+  schoolName: string = '';
+  schoolAddr: string = '';
 
-  constructor() {}
+  constructor(private educateTeacherService: EducateTeacherService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getSchoolDetails();
+  }
+
+  getSchoolDetails() {
+    this.educateTeacherService.getSchoolDetails().subscribe((res: any) => {
+      this.schoolName = res.data[0].SchoolName;
+      this.schoolAddr = res.data[0].SchoolAddress;
+    });
+  }
 }
