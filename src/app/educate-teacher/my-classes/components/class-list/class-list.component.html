@@ -1,5 +1,19 @@
 <div class="class-list-container" appCardStyle="36px 0 0 36px">
-  <div class="class-list-header" appCardHeaderStyle>My Classes</div>
+  <div class="class-list-header" appCardHeaderStyle>
+    <div>My Classes</div>
+    <div class="header-actions">
+      <div class="action-button">
+        <img title="Add Class" src="assets/icons/Plus.svg" alt="Add Class" />
+      </div>
+      <div class="action-button">
+        <img
+          title="Remove Class"
+          src="assets/icons/Minus.svg"
+          alt="Remove Class"
+        />
+      </div>
+    </div>
+  </div>
   <div class="class-list-body" appCardBodyStyle>
     <ul class="list">
       <li class="list-item" *ngFor="let class of classList">
