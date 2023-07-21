@@ -68,3 +68,14 @@
     }
   }
 }
+
+// Initially hidden
+app-popup-modal {
+  display: none;
+
+  .remove-class-container {
+    margin: 20px 10px;
+    font-family: "Karla";
+    font-size: 24px;
+  }
+}
