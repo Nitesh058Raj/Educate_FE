@@ -6,6 +6,7 @@
     [disabled]="disabled"
     [style.color]="variant === 'filled' ? 'white' : null"
     [style.backgroundColor]="variant === 'filled' ? bgColor : null"
+    (click)="onButtonClick()"
   >
     {{ text }}
   </button>

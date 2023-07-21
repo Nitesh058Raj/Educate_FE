@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-common-button',
@@ -10,8 +10,13 @@ export class CommonButtonComponent implements OnInit {
   @Input() variant: string = 'filled';
   @Input() disabled: boolean = false;
   @Input() bgColor: string = '#268aff';
+  @Output() BtnClickEmitter: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  onButtonClick() {
+    this.BtnClickEmitter.emit(this.text);
+  }
 }
