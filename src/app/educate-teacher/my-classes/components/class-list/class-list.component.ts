@@ -7,9 +7,9 @@ import { ModalService } from 'src/app/shared/services/modal-service/modal.servic
   styleUrls: ['./class-list.component.scss'],
 })
 export class ClassListComponent implements OnInit {
+  selectedClass: string = '';
   classList: string[] = [
     'Mathematics',
-    'Science',
     'Science',
     'Biology',
     'Chemistry',
@@ -19,6 +19,13 @@ export class ClassListComponent implements OnInit {
   constructor(private modalService: ModalService) {}
 
   ngOnInit(): void {}
+
+  onListBoxClick(item: string) {
+    if (this.selectedClass !== item) {
+      this.selectedClass = item;
+      // TODO: Write logic for calling the API of getting required data
+    }
+  }
 
   openModal(id: string) {
     this.modalService.open(id);
