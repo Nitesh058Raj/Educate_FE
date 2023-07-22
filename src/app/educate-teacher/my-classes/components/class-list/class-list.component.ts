@@ -7,6 +7,7 @@ import { ModalService } from 'src/app/shared/services/modal-service/modal.servic
   styleUrls: ['./class-list.component.scss'],
 })
 export class ClassListComponent implements OnInit {
+  isLoading: boolean = false; // TODO: Change it to true when API is called
   selectedClass: string = '';
   classList: string[] = [
     'Mathematics',

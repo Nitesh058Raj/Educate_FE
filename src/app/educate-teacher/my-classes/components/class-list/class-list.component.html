@@ -15,17 +15,23 @@
     </div>
   </div>
   <div class="class-list-body" appCardBodyStyle>
-    <ul class="list">
-      <li class="list-item" *ngFor="let class of classList">
-        <div
-          class="list-box"
-          [class.selected-list-box]="selectedClass === class"
-          (click)="onListBoxClick(class)"
-        >
-          <div class="list-text">{{ class }}</div>
-        </div>
-      </li>
-    </ul>
+    <div *ngIf="isLoading" [class.loading-box]="isLoading">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+
+    <div *ngIf="!isLoading">
+      <ul class="list">
+        <li class="list-item" *ngFor="let class of classList">
+          <div
+            class="list-box"
+            [class.selected-list-box]="selectedClass === class"
+            (click)="onListBoxClick(class)"
+          >
+            <div class="list-text">{{ class }}</div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 

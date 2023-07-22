@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CommonButtonComponent } from './components/common-button/common-button.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { LoginComponent } from './components/login/login.component';
 import { PopupModalComponent } from './components/popup-modal/popup-modal.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -20,6 +21,7 @@ import { ModalService } from './services/modal-service/modal.service';
     CardBodyStyleDirective,
     PopupModalComponent,
     CommonButtonComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [CommonModule],
   providers: [ModalService],
@@ -32,6 +34,7 @@ import { ModalService } from './services/modal-service/modal.service';
     CardBodyStyleDirective,
     PopupModalComponent,
     CommonButtonComponent,
+    LoadingSpinnerComponent,
   ],
 })
 export class SharedModule {}
