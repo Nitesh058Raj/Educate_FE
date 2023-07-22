@@ -1,4 +1,21 @@
 .class-details-container {
+  .class-details-header {
+    .header-actions {
+      display: flex;
+      justify-content: space-between;
+      .edit-button {
+        margin: 5px;
+        display: flex;
+        align-items: baseline;
+        border-radius: 5px;
+      }
+      .edit-button:hover {
+        cursor: pointer;
+        background: #268aff;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
   .class-details-body {
     display: flex;
     flex-direction: column;
@@ -40,6 +57,42 @@
 
     .detail-row:last-child {
       margin-bottom: 0; /* Remove bottom margin for the last row */
+    }
+  }
+}
+// Initially hidden
+app-popup-modal {
+  display: none;
+
+  .edit-class-container {
+    margin: 20px 10px;
+    font-family: "Karla";
+    font-size: 26px;
+
+    .edit-class-name {
+      input {
+        width: 60%;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        padding: 10px;
+        font-family: "Karla";
+        font-size: 24px;
+      }
+    }
+
+    .edit-class-description {
+      textarea {
+        width: 90%;
+        height: 100px;
+        resize: none;
+        border: 1px solid #000;
+        border-radius: 5px;
+        margin: 10px 0;
+        padding: 10px;
+        font-family: "Karla";
+        font-size: 24px;
+      }
     }
   }
 }
