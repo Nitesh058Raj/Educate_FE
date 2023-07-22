@@ -11,7 +11,6 @@ export class ClassListComponent implements OnInit {
   classList: string[] = [
     'Mathematics',
     'Science',
-    'Science',
     'Biology',
     'Chemistry',
     'Physics',
@@ -22,8 +21,10 @@ export class ClassListComponent implements OnInit {
   ngOnInit(): void {}
 
   onListBoxClick(item: string) {
-    console.log(item);
-    this.selectedClass = item;
+    if (this.selectedClass !== item) {
+      this.selectedClass = item;
+      // TODO: Write logic for calling the API of getting required data
+    }
   }
 
   openModal(id: string) {
