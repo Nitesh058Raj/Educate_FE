@@ -1,0 +1,13 @@
+<div class="common-button-container">
+  <button
+    class="common-button"
+    [class.outlined]="variant === 'outlined'"
+    [class.filled]="variant === 'filled'"
+    [disabled]="disabled"
+    [style.color]="variant === 'filled' ? 'white' : null"
+    [style.backgroundColor]="variant === 'filled' ? bgColor : null"
+    (click)="onButtonClick()"
+  >
+    {{ text }}
+  </button>
+</div>

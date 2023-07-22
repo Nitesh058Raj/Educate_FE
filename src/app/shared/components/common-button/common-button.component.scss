@@ -1,0 +1,17 @@
+:host {
+  display: inline-block;
+}
+
+.common-button-container {
+  margin: 15px 20px 15px 0px;
+  .common-button {
+    min-width: 100px;
+    padding: 10px 20px;
+    font-family: "Karla";
+    font-size: 24px;
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+}
