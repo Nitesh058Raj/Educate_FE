@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ClassDetailsComponent } from './components/class-details/class-details.component';
 import { ClassListComponent } from './components/class-list/class-list.component';
@@ -13,7 +14,7 @@ import { ResourcesComponent } from './components/resources/resources.component';
     ResourcesComponent,
     ClassRosterComponent,
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, FormsModule],
   exports: [
     ClassListComponent,
     ClassDetailsComponent,
