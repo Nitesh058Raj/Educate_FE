@@ -78,10 +78,12 @@ app-popup-modal {
         padding: 10px;
         font-family: "Karla";
         font-size: 24px;
+        margin-left: 10px;
       }
     }
 
     .edit-class-description {
+      margin-top: 2%;
       textarea {
         width: 90%;
         height: 100px;
