@@ -1,0 +1,41 @@
+.loading-spinner-container {
+  height: 100%;
+}
+
+.spinning-wheel {
+  content: "";
+  display: block;
+  left: 48%;
+  top: 40%;
+  width: 63px;
+  height: 63px;
+  margin: 0 auto;
+  border: 4px solid rgb(0, 0, 0);
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+  animation: load-spin 800ms infinite linear;
+  -webkit-animation: load-spin 800ms infinite linear;
+  -moz-animation: load-spin 800ms infinite linear;
+}
+
+@keyframes load-spin {
+  100% {
+    transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes load-spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes load-spin {
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
