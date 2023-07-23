@@ -60,38 +60,50 @@
     }
   }
 }
+
 // Initially hidden
 app-popup-modal {
   display: none;
 
   .edit-class-container {
-    margin: 20px 10px;
+    margin: 20px 20px;
     font-family: "Karla";
     font-size: 26px;
 
+    .edit-label {
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
     .edit-class-name {
+      display: flex;
+      align-items: center;
+
       input {
-        width: 60%;
+        width: 100%;
         height: 30px;
-        border: 1px solid #000;
+        color: #212121;
+        border: 1px solid #555;
         border-radius: 5px;
         padding: 10px;
         font-family: "Karla";
         font-size: 24px;
-        margin-left: 10px;
       }
     }
 
     .edit-class-description {
-      margin-top: 2%;
+      margin-top: 3%;
+      display: flex;
+      flex-direction: column;
+
       textarea {
-        width: 90%;
         height: 100px;
-        resize: none;
-        border: 1px solid #000;
-        border-radius: 5px;
-        margin: 10px 0;
         padding: 10px;
+        margin-top: 2%;
+        resize: none;
+        color: #212121;
+        border: 1px solid #555;
+        border-radius: 5px;
         font-family: "Karla";
         font-size: 24px;
       }

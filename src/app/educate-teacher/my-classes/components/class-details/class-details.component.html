@@ -24,13 +24,11 @@
   <div content>
     <div class="edit-class-container">
       <div class="edit-class-name">
-        Edit Class:
+        <div class="edit-label">Edit Class:</div>
         <input type="text" [(ngModel)]="EditclassName" />
-        <br />
       </div>
       <div class="edit-class-description">
-        Edit Description:
-        <br />
+        <div class="edit-label">Edit Description:</div>
         <textarea type="text" [(ngModel)]="EditclassDescription"></textarea>
       </div>
     </div>
@@ -46,7 +44,7 @@
     <app-common-button
       [variant]="'filled'"
       [disabled]="false"
-      [text]="'Submit'"
+      [text]="'Update'"
       [bgColor]="'#268aff'"
       (BtnClickEmitter)="handleOnClickEvent($event, 'edit-class-modal')"
     ></app-common-button>

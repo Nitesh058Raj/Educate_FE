@@ -34,7 +34,7 @@ export class ClassDetailsComponent implements OnInit {
       case 'Cancel':
         this.closeModal(modalId);
         break;
-      case 'Submit':
+      case 'Update':
         // TODO: Write logic for calling the API of adding Class
         // values are bind to the variables EditclassName and EditclassDescription with ngModel
 
