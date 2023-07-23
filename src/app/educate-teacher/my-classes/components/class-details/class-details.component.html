@@ -1,5 +1,12 @@
 <div class="class-details-container" appCardStyle>
-  <div class="class-details-header" appCardHeaderStyle>Class Details</div>
+  <div class="class-details-header" appCardHeaderStyle>
+    <div>Class Details</div>
+    <div class="header-actions">
+      <div class="edit-button" (click)="openModal('edit-class-modal')">
+        <img title="Edit Class" src="assets/icons/Edit.svg" alt="Edit Class" />
+      </div>
+    </div>
+  </div>
   <div class="class-details-body" appCardBodyStyle>
     <div class="detail-row class-name">
       <div class="label">Class Name:</div>
@@ -11,3 +18,35 @@
     </div>
   </div>
 </div>
+
+<app-popup-modal id="edit-class-modal">
+  <div headerContent>Edit Class</div>
+  <div content>
+    <div class="edit-class-container">
+      <div class="edit-class-name">
+        <div class="edit-label">Edit Class:</div>
+        <input type="text" [(ngModel)]="EditclassName" />
+      </div>
+      <div class="edit-class-description">
+        <div class="edit-label">Edit Description:</div>
+        <textarea type="text" [(ngModel)]="EditclassDescription"></textarea>
+      </div>
+    </div>
+  </div>
+  <div footerContent>
+    <app-common-button
+      [text]="'Cancel'"
+      [variant]="'outlined'"
+      [disabled]="false"
+      (BtnClickEmitter)="handleOnClickEvent($event, 'edit-class-modal')"
+    ></app-common-button>
+
+    <app-common-button
+      [variant]="'filled'"
+      [disabled]="false"
+      [text]="'Update'"
+      [bgColor]="'#268aff'"
+      (BtnClickEmitter)="handleOnClickEvent($event, 'edit-class-modal')"
+    ></app-common-button>
+  </div>
+</app-popup-modal>
