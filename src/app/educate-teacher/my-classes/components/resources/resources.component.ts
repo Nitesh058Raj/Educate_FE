@@ -30,7 +30,7 @@ export class ResourcesComponent implements OnInit {
       case 'Cancel':
         this.closeModal(modalId);
         break;
-      case 'Submit':
+      case 'Add':
         // TODO: Write logic for calling the API of adding Resource
         // values are bind with AddResourceName and AddResourceURL variables
 
