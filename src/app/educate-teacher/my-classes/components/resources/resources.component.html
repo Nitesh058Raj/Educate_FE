@@ -1,5 +1,23 @@
 <div class="resources-container" appCardStyle>
-  <div class="resources-header" appCardHeaderStyle>Resources</div>
+  <div class="resources-header" appCardHeaderStyle>
+    <div>Resources</div>
+    <div class="header-actions">
+      <div class="action-button" (click)="openModal('add-resource-modal')">
+        <img
+          title="Add Resource"
+          src="assets/icons/Plus.svg"
+          alt="Add Resource"
+        />
+      </div>
+      <div class="action-button" (click)="openModal('remove-resource-modal')">
+        <img
+          title="Remove Resource"
+          src="assets/icons/Minus.svg"
+          alt="Remove Resource"
+        />
+      </div>
+    </div>
+  </div>
   <div class="resources-body" appCardBodyStyle>
     <div
       class="resources-content"
@@ -12,3 +30,69 @@
     </ng-template>
   </div>
 </div>
+
+<app-popup-modal id="add-resource-modal">
+  <div headerContent>Add Resource</div>
+  <div content>
+    <div class="add-resource-container">
+      <div class="add-resource">
+        <div class="title">Name:</div>
+        <input
+          type="text"
+          placeholder="Enter Resource Name..."
+          [(ngModel)]="AddResourceName"
+        />
+      </div>
+      <br />
+      <div class="add-resource">
+        <div class="title">URL:</div>
+        <input
+          type="text"
+          placeholder="Enter Resource Link..."
+          [(ngModel)]="AddResourceURL"
+        />
+      </div>
+    </div>
+  </div>
+  <div footerContent>
+    <app-common-button
+      [text]="'Cancel'"
+      [variant]="'outlined'"
+      [disabled]="false"
+      (BtnClickEmitter)="handleOnClickEvent($event, 'add-resource-modal')"
+    ></app-common-button>
+
+    <app-common-button
+      [variant]="'filled'"
+      [disabled]="false"
+      [text]="'Add'"
+      [bgColor]="'#268aff'"
+      (BtnClickEmitter)="handleOnClickEvent($event, 'add-resource-modal')"
+    ></app-common-button>
+  </div>
+</app-popup-modal>
+
+<app-popup-modal id="remove-resource-modal">
+  <div headerContent>Remove Resource</div>
+  <div content>
+    <div class="remove-resource-container">
+      Are you sure you want to remove the resource?
+    </div>
+  </div>
+  <div footerContent>
+    <app-common-button
+      [text]="'Cancel'"
+      [variant]="'outlined'"
+      [disabled]="false"
+      (BtnClickEmitter)="handleOnClickEvent($event, 'remove-resource-modal')"
+    ></app-common-button>
+
+    <app-common-button
+      [variant]="'filled'"
+      [disabled]="false"
+      [text]="'Remove'"
+      [bgColor]="'#268aff'"
+      (BtnClickEmitter)="handleOnClickEvent($event, 'remove-resource-modal')"
+    ></app-common-button>
+  </div>
+</app-popup-modal>

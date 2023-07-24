@@ -1,4 +1,22 @@
 .resources-container {
+  .resources-header {
+    .header-actions {
+      display: flex;
+      justify-content: space-between;
+      .action-button {
+        margin: 5px;
+        display: flex;
+        align-items: baseline;
+        border-radius: 5px;
+      }
+      .action-button:hover {
+        cursor: pointer;
+        background: #268aff;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+
   .resources-body {
     .not-availble {
       color: #000;
@@ -9,5 +27,43 @@
       align-items: center;
       justify-content: center;
     }
+  }
+}
+
+// Initially hidden
+app-popup-modal {
+  display: none;
+
+  .add-resource-container {
+    margin: 20px 20px;
+    font-family: "Karla";
+    font-size: 26px;
+
+    .add-resource {
+      display: flex;
+      align-items: center;
+
+      .title {
+        width: 15%;
+      }
+
+      input {
+        width: 100%;
+        height: 30px;
+        color: #212121;
+        border: 1px solid #555;
+        border-radius: 5px;
+        padding: 10px;
+        font-family: "Karla";
+        font-size: 24px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .remove-resource-container {
+    margin: 20px 20px;
+    font-family: "Karla";
+    font-size: 24px;
   }
 }
