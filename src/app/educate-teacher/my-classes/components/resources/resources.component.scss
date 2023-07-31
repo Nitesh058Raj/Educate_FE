@@ -18,6 +18,43 @@
   }
 
   .resources-body {
+    .resources-content {
+      display: flex;
+      padding-left: 25px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+
+      .resource {
+        margin: 10px;
+        padding: 10px;
+
+        border: 1px solid transparent;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        background: #fff;
+
+        a {
+          text-decoration: none;
+        }
+
+        .resource-name {
+          font-family: "Karla";
+          font-size: 24px;
+          font-weight: 500;
+          color: #000;
+        }
+      }
+
+      .resource:hover {
+        cursor: pointer;
+        background: #268aff;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+        .resource-name {
+          color: #fff;
+        }
+      }
+    }
+
     .not-availble {
       color: #000;
       font-family: "Karla";
