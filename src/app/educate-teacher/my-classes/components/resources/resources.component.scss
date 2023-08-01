@@ -18,6 +18,8 @@
   }
 
   .resources-body {
+    font-family: "Karla";
+    font-size: 24px;
     .resources-content {
       display: flex;
       padding-left: 25px;
@@ -31,17 +33,11 @@
         border: 1px solid transparent;
         box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
         border-radius: 5px;
-        background: #fff;
-
-        a {
-          text-decoration: none;
-        }
+        transition: all 0.1s ease-in-out;
 
         .resource-name {
-          font-family: "Karla";
-          font-size: 24px;
-          font-weight: 500;
-          color: #000;
+          color: black;
+          text-decoration: none;
         }
       }
 
@@ -56,13 +52,7 @@
     }
 
     .not-availble {
-      color: #000;
-      font-family: "Karla";
-      font-size: 24px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      text-align: center;
     }
   }
 }
