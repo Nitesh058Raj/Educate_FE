@@ -18,12 +18,16 @@
       </div>
     </div>
   </div>
-  <div class="resources-body" appCardBodyStyle>
+  <div class="resources-body" appCardBodyStyle="23px 0px">
     <div
       class="resources-content"
       *ngIf="isResourceAvailable; else notAvailable"
     >
-      <!-- TODO: Render content here when available -->
+      <div class="resource" *ngFor="let resource of resourcesList">
+        <a class="resource-name" [href]="resource.url" target="_blank">{{
+          resource.name
+        }}</a>
+      </div>
     </div>
     <ng-template #notAvailable>
       <p class="not-availble">No resources available</p>

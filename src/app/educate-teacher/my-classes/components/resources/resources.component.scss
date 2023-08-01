@@ -18,14 +18,41 @@
   }
 
   .resources-body {
-    .not-availble {
-      color: #000;
-      font-family: "Karla";
-      font-size: 24px;
-      font-weight: 500;
+    font-family: "Karla";
+    font-size: 24px;
+    .resources-content {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      padding-left: 25px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+
+      .resource {
+        margin: 10px;
+        padding: 10px;
+
+        border: 1px solid transparent;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
+        transition: all 0.1s ease-in-out;
+
+        .resource-name {
+          color: black;
+          text-decoration: none;
+        }
+      }
+
+      .resource:hover {
+        cursor: pointer;
+        background: #268aff;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+        .resource-name {
+          color: #fff;
+        }
+      }
+    }
+
+    .not-availble {
+      text-align: center;
     }
   }
 }
