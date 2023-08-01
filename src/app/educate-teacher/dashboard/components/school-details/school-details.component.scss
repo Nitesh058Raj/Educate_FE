@@ -2,6 +2,10 @@
   .school-details-body {
     display: flex;
     flex-direction: column;
+    font-family: "Karla";
+    font-size: 24px;
+    color: #000;
+    font-weight: 500;
 
     .detail-row {
       display: flex;
@@ -10,17 +14,9 @@
       .label {
         min-width: 232px;
         padding-left: 32px;
-        color: #000;
-        font-family: "Karla";
-        font-size: 24px;
-        font-weight: 500;
       }
 
       .value {
-        color: #000;
-        font-family: "Karla";
-        font-size: 24px;
-        font-weight: 500;
         max-width: 450px; /* Set a maximum width for the value text */
         word-wrap: break-word;
       }
@@ -28,6 +24,17 @@
 
     .detail-row:last-child {
       margin-bottom: 0; /* Remove bottom margin for the last row */
+    }
+
+    .loading-box {
+      min-height: 284px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .errorBox {
+      text-align: center;
     }
   }
 }

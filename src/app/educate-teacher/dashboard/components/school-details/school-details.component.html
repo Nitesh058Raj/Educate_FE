@@ -1,13 +1,22 @@
 <div class="school-details-container" appCardStyle>
   <div class="school-details-header" appCardHeaderStyle>School Details</div>
   <div class="school-details-body" appCardBodyStyle>
-    <div class="detail-row">
-      <div class="label">School Name:</div>
-      <div class="value">{{ schoolName }}</div>
+    <div *ngIf="isLoading" [class.loading-box]="isLoading">
+      <app-loading-spinner></app-loading-spinner>
     </div>
-    <div class="detail-row">
-      <div class="label">School Address:</div>
-      <div class="value">{{ schoolAddr }}</div>
+
+    <div *ngIf="schoolDetails$ | async as schoolDetails; else errorBox">
+      <div class="detail-row">
+        <div class="label">School Name:</div>
+        <div class="value">{{ schoolDetails.schoolName }}</div>
+      </div>
+      <div class="detail-row">
+        <div class="label">School Address:</div>
+        <div class="value">{{ schoolDetails.schoolAddress }}</div>
+      </div>
     </div>
+    <ng-template #errorBox>
+      <p class="errorBox">{{ errorMessage }}</p>
+    </ng-template>
   </div>
 </div>
