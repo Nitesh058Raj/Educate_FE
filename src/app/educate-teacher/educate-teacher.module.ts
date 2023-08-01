@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { AssignmentsComponent } from './assignments/assignments.component';
@@ -11,6 +12,7 @@ import { HelpAndSupportsComponent } from './help-and-supports/help-and-supports.
 import { HelpAndSupportsModule } from './help-and-supports/help-and-supports.module';
 import { MyClassesComponent } from './my-classes/my-classes.component';
 import { MyClassesModule } from './my-classes/my-classes.module';
+import { EducateTeacherService } from './services/educate-teacher.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { MyClassesModule } from './my-classes/my-classes.module';
     MyClassesModule,
     AssignmentsModule,
     HelpAndSupportsModule,
+    HttpClientModule,
   ],
+  providers: [EducateTeacherService],
   exports: [EducateTeacherComponent],
 })
 export class EducateTeacherModule {}
