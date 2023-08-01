@@ -19,18 +19,32 @@
     </div>
   </div>
   <div class="resources-body" appCardBodyStyle="23px 0px">
+    <div *ngIf="isLoading" [class.loading-box]="isLoading">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+
     <div
       class="resources-content"
-      *ngIf="isResourceAvailable; else notAvailable"
+      *ngIf="resources$ | async as resourcesList; else errorBox"
     >
       <div class="resource" *ngFor="let resource of resourcesList">
-        <a class="resource-name" [href]="resource.url" target="_blank">{{
-          resource.name
-        }}</a>
+        <a
+          class="resource-name"
+          [href]="resource.resourceUrl"
+          target="_blank"
+          >{{ resource.resourceName }}</a
+        >
       </div>
     </div>
-    <ng-template #notAvailable>
+
+    <!-- <ng-template #notAvailable>
       <p class="not-availble">No resources available</p>
+    </ng-template> -->
+    <ng-template #errorBox>
+      <p class="errorBox" *ngIf="errorMessage">
+        <img src="assets/icons/ErrorCross.svg" alt="error" />
+        {{ errorMessage }}
+      </p>
     </ng-template>
   </div>
 </div>

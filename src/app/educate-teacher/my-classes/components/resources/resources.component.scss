@@ -20,6 +20,14 @@
   .resources-body {
     font-family: "Karla";
     font-size: 24px;
+
+    .loading-box {
+      min-height: 284px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .resources-content {
       display: flex;
       padding-left: 25px;
@@ -53,6 +61,16 @@
 
     .not-availble {
       text-align: center;
+    }
+
+    .errorBox {
+      padding: 10px;
+      color: #ff004c;
+      display: flex;
+      justify-content: center;
+      img {
+        margin-right: 10px;
+      }
     }
   }
 }
