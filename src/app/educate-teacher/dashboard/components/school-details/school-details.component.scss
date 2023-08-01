@@ -34,7 +34,12 @@
     }
 
     .errorBox {
-      text-align: center;
+      color: #ff004c;
+      display: flex;
+      justify-content: center;
+      img {
+        margin-right: 10px;
+      }
     }
   }
 }

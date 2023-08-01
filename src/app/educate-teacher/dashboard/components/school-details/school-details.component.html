@@ -15,8 +15,12 @@
         <div class="value">{{ schoolDetails.schoolAddress }}</div>
       </div>
     </div>
+
     <ng-template #errorBox>
-      <p class="errorBox">{{ errorMessage }}</p>
+      <p class="errorBox" *ngIf="errorMessage">
+        <img src="assets/icons/ErrorCross.svg" alt="error" />
+        {{ errorMessage }}
+      </p>
     </ng-template>
   </div>
 </div>
