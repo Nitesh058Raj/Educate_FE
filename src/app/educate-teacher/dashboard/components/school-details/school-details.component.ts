@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EMPTY, Observable, catchError, finalize, map } from 'rxjs';
+import { EducateTeacherService } from 'src/app/educate-teacher/services/educate-teacher.service';
+import { SchoolDetailsInterface } from 'src/app/models/common.model';
 
 @Component({
   selector: 'app-school-details',
@@ -6,11 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./school-details.component.scss'],
 })
 export class SchoolDetailsComponent implements OnInit {
-  schoolName: string = 'Mohandas Karamchandra High School';
-  schoolAddr: string =
-    '23/P, Gateway road, Near to old court, Anand, Gujarat [ 388 001 ]';
+  isLoading = true;
+  errorMessage = '';
+  schoolDetails$: Observable<SchoolDetailsInterface> | undefined;
 
-  constructor() {}
+  constructor(private readonly educateTeacherService: EducateTeacherService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.schoolDetails$ = this.educateTeacherService.getSchoolDetails().pipe(
+      map((data) => data[1]),
+      catchError((err) => {
+        this.errorMessage = err;
+        return EMPTY;
+      }),
+      finalize(() => (this.isLoading = false))
+    );
+  }
 }

@@ -1,14 +1,27 @@
 <div class="announcements-container" appCardStyle>
   <div class="announcements-header" appCardHeaderStyle>Announcements</div>
   <div class="announcements-body" appCardBodyStyle>
-    <div
-      class="announcements-content"
-      *ngIf="isAnnouncementAvailable; else notAvailable"
-    >
-      <!-- TODO: Render content here when available -->
+    <div *ngIf="isLoading" [class.loading-box]="isLoading">
+      <app-loading-spinner></app-loading-spinner>
     </div>
-    <ng-template #notAvailable>
-      <p class="not-availble">No announcements available</p>
+
+    <div *ngIf="announcements$ | async as announcements; else errorBox">
+      <div
+        class="announcements-content"
+        *ngFor="let announcement of announcements"
+      >
+        <li class="announcement-item">{{ announcement.content }}</li>
+      </div>
+      <!-- <ng-template #notAvailable>
+        <p class="not-availble">No announcements available</p>
+      </ng-template> -->
+    </div>
+
+    <ng-template #errorBox>
+      <p class="errorBox" *ngIf="errorMessage">
+        <img src="assets/icons/ErrorCross.svg" alt="error" />
+        {{ errorMessage }}
+      </p>
     </ng-template>
   </div>
 </div>
