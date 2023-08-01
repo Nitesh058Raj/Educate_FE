@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { HttpClientModule } from '@angular/common/http';
 import { AnnouncementsComponent } from './announcements.component';
 
 describe('AnnouncementsComponent', () => {
@@ -8,9 +9,9 @@ describe('AnnouncementsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AnnouncementsComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule],
+      declarations: [AnnouncementsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
