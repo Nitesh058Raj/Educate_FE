@@ -1,13 +1,34 @@
 .announcements-container {
   .announcements-body {
-    .not-availble {
-      color: #000;
-      font-family: "Karla";
-      font-size: 24px;
-      font-weight: 500;
+    font-family: "Karla";
+    font-size: 24px;
+
+    .loading-box {
+      min-height: 284px;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .announcements-content {
+      padding: 0 40px;
+
+      .announcement-item {
+        margin-bottom: 10px;
+      }
+    }
+
+    .not-availble {
+      text-align: center;
+    }
+
+    .errorBox {
+      color: #ff004c;
+      display: flex;
+      justify-content: center;
+      img {
+        margin-right: 10px;
+      }
     }
   }
 }
