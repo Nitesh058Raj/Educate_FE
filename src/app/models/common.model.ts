@@ -41,3 +41,15 @@ export interface ResourcesResponseInterface {
   status: string;
   data: ResourcesInterface[];
 }
+
+export interface ClassDetailsInterface {
+  className: string;
+  classDescription: string;
+}
+
+export interface ClassDetailsResponseInterface {
+  message: string;
+  statusCode: number;
+  status: string;
+  data: ClassDetailsInterface[];
+}
