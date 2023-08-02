@@ -4,6 +4,8 @@ import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import {
   AnnouncementsInterface,
   AnnouncementsResponseInterface,
+  ResourcesInterface,
+  ResourcesResponseInterface,
   SchoolDetailsInterface,
   SchoolDetailsResponseInterface,
 } from 'src/app/models/common.model';
@@ -14,6 +16,7 @@ import {
 export class EducateTeacherService {
   // TODO: We will get this from the user login
   districtId: number = 1;
+  classId: number = 1;
 
   constructor(private readonly http: HttpClient) {}
 
@@ -37,6 +40,18 @@ export class EducateTeacherService {
       .pipe(
         map((response) => response.data),
         tap((data) => console.log('Announcements: ', data)),
+        catchError(this.handleError)
+      );
+  }
+
+  getResources(): Observable<ResourcesInterface[]> {
+    return this.http
+      .get<ResourcesResponseInterface>(
+        `http://localhost:5000/api/resources/${this.classId}`
+      )
+      .pipe(
+        map((response) => response.data),
+        tap((data) => console.log('Resources: ', data)),
         catchError(this.handleError)
       );
   }

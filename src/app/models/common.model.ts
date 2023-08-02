@@ -27,3 +27,17 @@ export interface SchoolDetailsResponseInterface {
   status: string;
   data: SchoolDetailsInterface[];
 }
+
+export interface ResourcesInterface {
+  resourceID: number;
+  classID: number;
+  resourceName: string;
+  resourceUrl: string;
+}
+
+export interface ResourcesResponseInterface {
+  message: string;
+  statusCode: number;
+  status: string;
+  data: ResourcesInterface[];
+}

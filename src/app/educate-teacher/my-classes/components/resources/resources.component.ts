@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EMPTY, Observable, catchError, finalize } from 'rxjs';
+import { EducateTeacherService } from 'src/app/educate-teacher/services/educate-teacher.service';
+import { ResourcesInterface } from 'src/app/models/common.model';
 import { ModalService } from 'src/app/shared/services/modal-service/modal.service';
 
 @Component({
@@ -7,7 +10,9 @@ import { ModalService } from 'src/app/shared/services/modal-service/modal.servic
   styleUrls: ['./resources.component.scss'],
 })
 export class ResourcesComponent implements OnInit {
-  isResourceAvailable = true;
+  isLoading = true;
+  errorMessage = '';
+  resources$: Observable<ResourcesInterface[]> | undefined;
 
   // resources list
   resourcesList = [
@@ -16,40 +21,12 @@ export class ResourcesComponent implements OnInit {
       url: 'https://www.example.com/maths-textbook',
     },
     {
-      name: 'History Article',
-      url: 'https://www.example.com/history-article',
-    },
-    {
       name: 'English Video',
       url: 'https://www.example.com/english-video',
     },
     {
-      name: 'Science Website',
-      url: 'https://www.example.com/science-website',
-    },
-    {
-      name: 'Geography Article',
-      url: 'https://www.example.com/geography-article',
-    },
-    {
-      name: 'Physics Textbook',
-      url: 'https://www.example.com/physics-textbook',
-    },
-    {
-      name: 'Chemistry Video',
-      url: 'https://www.example.com/chemistry-video',
-    },
-    {
-      name: 'Biology Website',
-      url: 'https://www.example.com/biology-website',
-    },
-    {
       name: 'Literature Article',
       url: 'https://www.example.com/literature-article',
-    },
-    {
-      name: 'Art Video',
-      url: 'https://www.example.com/art-video',
     },
     {
       name: 'Music Textbook',
@@ -58,14 +35,6 @@ export class ResourcesComponent implements OnInit {
     {
       name: 'Computer Science Website',
       url: 'https://www.example.com/computer-science-website',
-    },
-    {
-      name: 'Economics Article',
-      url: 'https://www.example.com/economics-article',
-    },
-    {
-      name: 'Politics Video',
-      url: 'https://www.example.com/politics-video',
     },
     {
       name: 'Psychology Textbook',
@@ -77,9 +46,20 @@ export class ResourcesComponent implements OnInit {
   AddResourceName: string = '';
   AddResourceURL: string = '';
 
-  constructor(private modalService: ModalService) {}
+  constructor(
+    private modalService: ModalService,
+    private readonly educateTeacherService: EducateTeacherService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.resources$ = this.educateTeacherService.getResources().pipe(
+      catchError((err) => {
+        this.errorMessage = err;
+        return EMPTY;
+      }),
+      finalize(() => (this.isLoading = false))
+    );
+  }
 
   openModal(id: string) {
     this.modalService.open(id);
@@ -95,7 +75,7 @@ export class ResourcesComponent implements OnInit {
         this.closeModal(modalId);
         break;
       case 'Add':
-        // TODO: Write logic for calling the API of adding Resource
+        // TODO: Write logic for calling the service of adding Resource
         // values are bind with AddResourceName and AddResourceURL variables
 
         this.closeModal(modalId);
