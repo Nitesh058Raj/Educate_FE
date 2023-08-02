@@ -41,3 +41,15 @@ export interface ResourcesResponseInterface {
   status: string;
   data: ResourcesInterface[];
 }
+
+export interface ClassInterface {
+  classID: number;
+  className: string;
+}
+
+export interface ClassResponseInterface {
+  message: string;
+  statusCode: number;
+  status: string;
+  data: ClassInterface[];
+}
