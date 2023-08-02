@@ -4,6 +4,8 @@ import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import {
   AnnouncementsInterface,
   AnnouncementsResponseInterface,
+  ClassDetailsInterface,
+  ClassDetailsResponseInterface,
   ResourcesInterface,
   ResourcesResponseInterface,
   SchoolDetailsInterface,
@@ -52,6 +54,18 @@ export class EducateTeacherService {
       .pipe(
         map((response) => response.data),
         tap((data) => console.log('Resources: ', data)),
+        catchError(this.handleError)
+      );
+  }
+
+  getClassDetails(): Observable<ClassDetailsInterface[]> {
+    return this.http
+      .get<ClassDetailsResponseInterface>(
+        `http://localhost:5000/api/class/${this.classId}`
+      )
+      .pipe(
+        map((response) => response.data),
+        tap((data) => console.log('Class details: ', data)),
         catchError(this.handleError)
       );
   }
