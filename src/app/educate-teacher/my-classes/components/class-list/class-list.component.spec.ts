@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { HttpClient } from '@angular/common/http';
 import { ClassListComponent } from './class-list.component';
 
 describe('ClassListComponent', () => {
@@ -8,9 +9,9 @@ describe('ClassListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClassListComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClient],
+      declarations: [ClassListComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

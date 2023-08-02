@@ -62,7 +62,7 @@ export class EducateTeacherService {
   getClassList(): Observable<ClassInterface[]> {
     return this.http
       .get<ClassResponseInterface>(
-        `http://localhost:5001/api/classes/${this.teacherId}`
+        `http://localhost:5000/api/classes/${this.teacherId}`
       )
       .pipe(
         map((response) => response.data),
