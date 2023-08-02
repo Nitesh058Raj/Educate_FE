@@ -1,3 +1,5 @@
+$table_border: 1px solid #000;
+
 .assignments-list-container {
   .assignments-list-header {
     .header-actions {
@@ -17,5 +19,33 @@
     }
   }
   .assignments-list-body {
+    .assignment-details {
+      margin: 0 33px;
+      .custom-table {
+        font-family: "Karla";
+        font-size: 26px;
+        display: flex;
+
+        .column {
+          flex: 1;
+          border-bottom: $table_border;
+
+          .column-header {
+            font-weight: 700;
+            border-right: $table_border;
+            border-bottom: $table_border;
+          }
+
+          .row {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-all;
+            border-right: $table_border;
+          }
+        }
+      }
+    }
   }
 }
