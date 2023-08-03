@@ -36,4 +36,12 @@ export class AssignmentsListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  onEditButtonClicked(id: number) {
+    console.log(`Edit button clicked for assignment ${id}`);
+  }
+
+  onDeleteButtonClicked(id: number) {
+    console.log(`Delete button clicked for assignment ${id}`);
+  }
 }

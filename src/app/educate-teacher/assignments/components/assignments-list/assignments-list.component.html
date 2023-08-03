@@ -42,15 +42,15 @@
             Actions
           </div>
           <div class="row" style="border-right: 0px">
-            <div class="action-button">
+            <div class="action-button" (click)="onEditButtonClicked(item.id)">
               <img
-                title="View Assignment"
-                src="assets/icons/EyeOpen.svg"
-                alt="View Assignment"
+                title="Edit Assignment"
+                src="assets/icons/EditBlue.svg"
+                alt="Edit Assignment"
               />
             </div>
             <div class="verticle-bar"></div>
-            <div class="action-button">
+            <div class="action-button" (click)="onDeleteButtonClicked(item.id)">
               <img
                 title="Delete Assignment"
                 src="assets/icons/Delete.svg"
