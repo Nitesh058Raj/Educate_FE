@@ -53,3 +53,15 @@ export interface ClassResponseInterface {
   status: string;
   data: ClassInterface[];
 }
+
+export interface ClassDetailsInterface {
+  className: string;
+  classDescription: string;
+}
+
+export interface ClassDetailsResponseInterface {
+  message: string;
+  statusCode: number;
+  status: string;
+  data: ClassDetailsInterface[];
+}

@@ -2,12 +2,22 @@ import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AssignmentSingleComponent } from './components/assignment-single/assignment-single.component';
+import { AssignmentsListComponent } from './components/assignments-list/assignments-list.component';
 import { AssignmentsOverviewComponent } from './components/assignments-overview/assignments-overview.component';
 
 @NgModule({
-  declarations: [AssignmentsOverviewComponent],
+  declarations: [
+    AssignmentsOverviewComponent,
+    AssignmentsListComponent,
+    AssignmentSingleComponent,
+  ],
   imports: [CommonModule, SharedModule, FormsModule],
-  exports: [AssignmentsOverviewComponent],
+  exports: [
+    AssignmentsOverviewComponent,
+    AssignmentsListComponent,
+    AssignmentSingleComponent,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AssignmentsModule {}

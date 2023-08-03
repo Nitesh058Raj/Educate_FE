@@ -1,0 +1,79 @@
+.assignment-single-container {
+  .assignment-single-header {
+  }
+  .assignment-single-body {
+    .form {
+      margin: 0 33px;
+      .form-item {
+        display: flex;
+        align-items: center;
+        font-family: "Karla";
+        font-size: 26px;
+        margin-bottom: 15px;
+
+        .item-title {
+          width: 25%;
+        }
+
+        .item-input {
+          display: flex;
+          width: 100%;
+
+          input {
+            font-family: "Karla";
+            font-size: 24px;
+          }
+
+          input[type="text"] {
+            height: 25px;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            color: #212121;
+            border: 1px solid #555;
+          }
+
+          label {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+
+            input[type="radio"] {
+              height: 25px;
+              width: 25px;
+              margin-right: 10px;
+            }
+          }
+
+          input[type="date"] {
+            height: 25px;
+            width: 200px; // Fixed width required
+            padding: 10px;
+            border-radius: 5px;
+            color: #212121;
+            border: 1px solid #555;
+          }
+
+          textarea {
+            width: 100%;
+            padding: 10px;
+            color: #212121;
+            font-family: "Karla";
+            font-size: 24px;
+          }
+        }
+      }
+
+      .form-item:last-child {
+        margin-bottom: 0;
+        align-items: flex-start;
+      }
+
+      .footer {
+        padding: 0 0 20px 0;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+}

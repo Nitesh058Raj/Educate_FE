@@ -1,0 +1,65 @@
+<div class="assignments-list-container" appCardStyle>
+  <div class="assignments-list-header" appCardHeaderStyle>
+    <div>Assignments List</div>
+    <div class="header-actions">
+      <div class="action-button">
+        <img
+          title="Add Assignment"
+          src="assets/icons/Plus.svg"
+          alt="Add Assignment"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="assignments-list-body" appCardBodyStyle>
+    <div class="assignment-details">
+      <div
+        class="custom-table"
+        *ngFor="let item of assignmentDetails; let id = index"
+      >
+        <div class="column">
+          <div class="row column-header" *ngIf="id === 0">ID</div>
+          <div class="row">{{ item.id }}</div>
+        </div>
+        <div class="column">
+          <div class="row column-header" *ngIf="id === 0">Title</div>
+          <div class="row">{{ item.title }}</div>
+        </div>
+        <div class="column">
+          <div class="row column-header" *ngIf="id === 0">Due Date</div>
+          <div class="row">{{ item.dueDate }}</div>
+        </div>
+        <div class="column">
+          <div class="row column-header" *ngIf="id === 0">Status</div>
+          <div class="row">{{ item.status }}</div>
+        </div>
+        <div class="column">
+          <div
+            class="row column-header"
+            style="border-right: 0px"
+            *ngIf="id === 0"
+          >
+            Actions
+          </div>
+          <div class="row" style="border-right: 0px">
+            <div class="action-button" (click)="onEditButtonClicked(item.id)">
+              <img
+                title="Edit Assignment"
+                src="assets/icons/EditBlue.svg"
+                alt="Edit Assignment"
+              />
+            </div>
+            <div class="verticle-bar"></div>
+            <div class="action-button" (click)="onDeleteButtonClicked(item.id)">
+              <img
+                title="Delete Assignment"
+                src="assets/icons/Delete.svg"
+                alt="Delete Assignment"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

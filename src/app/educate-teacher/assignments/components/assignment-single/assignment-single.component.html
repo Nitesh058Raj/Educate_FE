@@ -1,0 +1,50 @@
+<div class="assignment-single-container" appCardStyle="36px">
+  <div class="assignment-single-header" appCardHeaderStyle>Assignment 1</div>
+  <div class="assignment-single-body" appCardBodyStyle="33px 0 0">
+    <form class="form">
+      <div class="form-item">
+        <div class="item-title">Title:</div>
+        <div class="item-input">
+          <input type="text" />
+        </div>
+      </div>
+      <div class="form-item">
+        <div class="item-title">Status:</div>
+        <div class="item-input">
+          <label for="active">
+            <input type="radio" name="status" id="active" value="Active" />
+            Active
+          </label>
+          <label for="inactive">
+            <input type="radio" name="status" id="inactive" value="Inactive" />
+            Inactive
+          </label>
+        </div>
+      </div>
+      <div class="form-item">
+        <div class="item-title">Due Date:</div>
+        <div class="item-input">
+          <input type="date" name="duedate" id="" />
+        </div>
+      </div>
+      <div class="form-item">
+        <div class="item-title">Content:</div>
+        <div class="item-input">
+          <textarea name="content"></textarea>
+        </div>
+      </div>
+      <div class="footer">
+        <app-common-button
+          [text]="'Cancel'"
+          [variant]="'outlined'"
+          [disabled]="false"
+        ></app-common-button>
+        <app-common-button
+          [text]="'Save'"
+          [variant]="'filled'"
+          [disabled]="false"
+        ></app-common-button>
+      </div>
+    </form>
+  </div>
+</div>

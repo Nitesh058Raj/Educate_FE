@@ -8,14 +8,29 @@
     </div>
   </div>
   <div class="class-details-body" appCardBodyStyle>
-    <div class="detail-row class-name">
-      <div class="label">Class Name:</div>
-      <div class="value">{{ className }}</div>
+    <div *ngIf="isLoading" [class.loading-box]="isLoading">
+      <app-loading-spinner></app-loading-spinner>
     </div>
-    <div class="detail-row">
-      <div class="label">Class Description:</div>
-      <div class="value class-description">{{ classDescription }}</div>
+
+    <div *ngIf="classDetails$ | async as classDetails; else errorBox">
+      <div class="detail-row class-name">
+        <div class="label">Class Name:</div>
+        <div class="value">{{ classDetails.className }}</div>
+      </div>
+      <div class="detail-row">
+        <div class="label">Class Description:</div>
+        <div class="value class-description">
+          {{ classDetails.classDescription }}
+        </div>
+      </div>
     </div>
+
+    <ng-template #errorBox>
+      <p class="errorBox" *ngIf="errorMessage">
+        <img src="assets/icons/ErrorCross.svg" alt="error" />
+        {{ errorMessage }}
+      </p>
+    </ng-template>
   </div>
 </div>
 
@@ -25,11 +40,11 @@
     <div class="edit-class-container">
       <div class="edit-class-name">
         <div class="edit-label">Edit Class:</div>
-        <input type="text" [(ngModel)]="EditclassName" />
+        <input type="text" [(ngModel)]="editclassName" />
       </div>
       <div class="edit-class-description">
         <div class="edit-label">Edit Description:</div>
-        <textarea type="text" [(ngModel)]="EditclassDescription"></textarea>
+        <textarea type="text" [(ngModel)]="editclassDescription"></textarea>
       </div>
     </div>
   </div>
