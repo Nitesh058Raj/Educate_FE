@@ -14,37 +14,9 @@ export class ResourcesComponent implements OnInit {
   errorMessage = '';
   resources$: Observable<ResourcesInterface[]> | undefined;
 
-  // resources list
-  resourcesList = [
-    {
-      name: 'Maths Textbook',
-      url: 'https://www.example.com/maths-textbook',
-    },
-    {
-      name: 'English Video',
-      url: 'https://www.example.com/english-video',
-    },
-    {
-      name: 'Literature Article',
-      url: 'https://www.example.com/literature-article',
-    },
-    {
-      name: 'Music Textbook',
-      url: 'https://www.example.com/music-textbook',
-    },
-    {
-      name: 'Computer Science Website',
-      url: 'https://www.example.com/computer-science-website',
-    },
-    {
-      name: 'Psychology Textbook',
-      url: 'https://www.example.com/psychology-textbook',
-    },
-  ];
-
   //pop up variables
-  AddResourceName: string = '';
-  AddResourceURL: string = '';
+  addResourceName: string = '';
+  addResourceURL: string = '';
 
   constructor(
     private modalService: ModalService,
@@ -76,7 +48,7 @@ export class ResourcesComponent implements OnInit {
         break;
       case 'Add':
         // TODO: Write logic for calling the service of adding Resource
-        // values are bind with AddResourceName and AddResourceURL variables
+        // values are bind with addResourceName and addResourceURL variables
 
         this.closeModal(modalId);
         break;
