@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EMPTY, Observable, catchError, finalize, map, tap } from 'rxjs';
+import { EducateTeacherService } from 'src/app/educate-teacher/services/educate-teacher.service';
+import { ClassDetailsInterface } from 'src/app/models/common.model';
 import { ModalService } from 'src/app/shared/services/modal-service/modal.service';
 
 @Component({
@@ -7,18 +10,32 @@ import { ModalService } from 'src/app/shared/services/modal-service/modal.servic
   styleUrls: ['./class-details.component.scss'],
 })
 export class ClassDetailsComponent implements OnInit {
-  classDescription: string =
-    'This class is created for Mathematics subject where all the assignments and updates will be posted.';
-  className: string = 'Mathematics';
+  isLoading = true;
+  errorMessage = '';
+  classDetails$: Observable<ClassDetailsInterface> | undefined;
 
-  EditclassName: string = '';
-  EditclassDescription: string = '';
+  // Edit popup variables
+  editclassName: string = '';
+  editclassDescription: string = '';
 
-  constructor(private modalService: ModalService) {}
+  constructor(
+    private modalService: ModalService,
+    private readonly educateTeacherService: EducateTeacherService
+  ) {}
 
   ngOnInit(): void {
-    this.EditclassName = this.className;
-    this.EditclassDescription = this.classDescription;
+    this.classDetails$ = this.educateTeacherService.getClassDetails().pipe(
+      map((data) => data[0]),
+      tap((data) => {
+        this.editclassName = data.className;
+        this.editclassDescription = data.classDescription;
+      }),
+      catchError((err) => {
+        this.errorMessage = err;
+        return EMPTY;
+      }),
+      finalize(() => (this.isLoading = false))
+    );
   }
 
   openModal(id: string) {
@@ -36,7 +53,7 @@ export class ClassDetailsComponent implements OnInit {
         break;
       case 'Update':
         // TODO: Write logic for calling the API of adding Class
-        // values are bind to the variables EditclassName and EditclassDescription with ngModel
+        // values are bind to the variables editclassName and editclassDescription with ngModel
 
         this.closeModal(modalId);
         break;
