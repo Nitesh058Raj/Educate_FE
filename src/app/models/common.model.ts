@@ -42,6 +42,18 @@ export interface ResourcesResponseInterface {
   data: ResourcesInterface[];
 }
 
+export interface ClassInterface {
+  classID: number;
+  className: string;
+}
+
+export interface ClassResponseInterface {
+  message: string;
+  statusCode: number;
+  status: string;
+  data: ClassInterface[];
+}
+
 export interface ClassDetailsInterface {
   className: string;
   classDescription: string;

@@ -19,19 +19,26 @@
       <app-loading-spinner></app-loading-spinner>
     </div>
 
-    <div *ngIf="!isLoading">
+    <div *ngIf="classList$ | async as classList; else errorBox">
       <ul class="list">
         <li class="list-item" *ngFor="let class of classList">
           <div
             class="list-box"
-            [class.selected-list-box]="selectedClass === class"
-            (click)="onListBoxClick(class)"
+            [class.selected-list-box]="selectedClass === class.className"
+            (click)="onListBoxClick(class.className)"
           >
-            <div class="list-text">{{ class }}</div>
+            <div class="list-text">{{ class.className }}</div>
           </div>
         </li>
       </ul>
     </div>
+
+    <ng-template #errorBox>
+      <p class="errorBox" *ngIf="errorMessage">
+        <img src="assets/icons/ErrorCross.svg" alt="error" />
+        {{ errorMessage }}
+      </p>
+    </ng-template>
   </div>
 </div>
 
