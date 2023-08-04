@@ -3,26 +3,34 @@
     Assignments Overview
   </div>
   <div class="assignments-overview-body" appCardBodyStyle>
-    <div class="dropdown">
-      <select
-        class="dropdown-select"
-        (change)="onDropdownChange()"
-        [(ngModel)]="selectedOption"
-      >
-        <option disabled selected id="placeholder">Select Class</option>
-        <option *ngFor="let option of optionList">{{ option }}</option>
-      </select>
+    <div *ngIf="isLoading" [class.loading-box]="isLoading">
+      <app-loading-spinner></app-loading-spinner>
     </div>
-    <div class="contant">
-      <div class="contant-row">
-        Active Assignments: &nbsp; <b>{{ activeAssignments }}</b>
-      </div>
-      <div class="contant-row">
-        Incoming Assignments: &nbsp; <b>{{ inactiveAssignments }}</b>
-      </div>
-      <div class="contant-row">
-        Average Performance: &nbsp; <b>{{ performance }}</b>
+
+    <div *ngIf="assignmentCount$ | async as assignmentCount; else errorBox">
+      <div class="contant">
+        <div class="contant-row">
+          Active Assignments: &nbsp;
+          <b>{{ assignmentCount.active_assignments }}</b>
+        </div>
+        <div class="contant-row">
+          Incoming Assignments: &nbsp;
+          <b>{{
+            assignmentCount.total_assignments -
+              assignmentCount.active_assignments
+          }}</b>
+        </div>
+        <div class="contant-row">
+          Average Performance: &nbsp; <b>{{ performance }}</b>
+        </div>
       </div>
     </div>
+
+    <ng-template #errorBox>
+      <p class="errorBox" *ngIf="errorMessage">
+        <img src="assets/icons/ErrorCross.svg" alt="error" />
+        {{ errorMessage }}
+      </p>
+    </ng-template>
   </div>
 </div>

@@ -1,20 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EMPTY, Observable, catchError, finalize, map } from 'rxjs';
+import { EducateTeacherService } from 'src/app/educate-teacher/services/educate-teacher.service';
+import { AssignmentCountInterface } from 'src/app/models/common.model';
 
 @Component({
   selector: 'app-assignments-overview',
   templateUrl: './assignments-overview.component.html',
   styleUrls: ['./assignments-overview.component.scss'],
 })
-export class AssignmentsOverviewComponent {
-  activeAssignments: number = 3;
-  inactiveAssignments: number = 2;
+export class AssignmentsOverviewComponent implements OnInit {
+  // TODO: Implate the logic for the following variable
   performance: string = '55.10%';
-  selectedOption: string = 'Select Class';
-  optionList: string[] = ['Mathematics', 'Physics', 'Chemistry', 'Biology'];
 
-  constructor() {}
+  isLoading = true;
+  errorMessage = '';
 
-  onDropdownChange() {
-    // TODO: Implement data fetching based on selected option here
+  assignmentCount$: Observable<AssignmentCountInterface> | undefined;
+
+  constructor(private readonly educateTeacherService: EducateTeacherService) {}
+
+  ngOnInit(): void {
+    this.assignmentCount$ = this.educateTeacherService
+      .getAssignmentCount()
+      .pipe(
+        map((data) => data[0]),
+        catchError((err) => {
+          this.errorMessage = err;
+          return EMPTY;
+        }),
+        finalize(() => (this.isLoading = false))
+      );
   }
 }
