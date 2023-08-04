@@ -4,10 +4,12 @@ import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import {
   AnnouncementsInterface,
   AnnouncementsResponseInterface,
-  ClassInterface,
-  ClassResponseInterface,
+  AssignmentCountInterface,
+  AssignmentCountResponseInterface,
   ClassDetailsInterface,
   ClassDetailsResponseInterface,
+  ClassInterface,
+  ClassResponseInterface,
   ResourcesInterface,
   ResourcesResponseInterface,
   SchoolDetailsInterface,
@@ -73,7 +75,6 @@ export class EducateTeacherService {
       );
   }
 
-      
   getClassDetails(): Observable<ClassDetailsInterface[]> {
     return this.http
       .get<ClassDetailsResponseInterface>(
@@ -82,6 +83,18 @@ export class EducateTeacherService {
       .pipe(
         map((response) => response.data),
         tap((data) => console.log('Class details: ', data)),
+        catchError(this.handleError)
+      );
+  }
+
+  getAssignmentCount(): Observable<AssignmentCountInterface[]> {
+    return this.http
+      .get<AssignmentCountResponseInterface>(
+        `http://localhost:5000/api/assignment/count/${this.classId}`
+      )
+      .pipe(
+        map((response) => response.data),
+        tap((data) => console.log('Assignment count: ', data)),
         catchError(this.handleError)
       );
   }
