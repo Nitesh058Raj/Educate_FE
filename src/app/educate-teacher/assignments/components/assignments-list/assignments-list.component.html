@@ -12,54 +12,66 @@
     </div>
   </div>
   <div class="assignments-list-body" appCardBodyStyle>
-    <div class="assignment-details">
-      <div
-        class="custom-table"
-        *ngFor="let item of assignmentDetails; let id = index"
-      >
-        <div class="column">
-          <div class="row column-header" *ngIf="id === 0">ID</div>
-          <div class="row">{{ item.id }}</div>
-        </div>
-        <div class="column">
-          <div class="row column-header" *ngIf="id === 0">Title</div>
-          <div class="row">{{ item.title }}</div>
-        </div>
-        <div class="column">
-          <div class="row column-header" *ngIf="id === 0">Due Date</div>
-          <div class="row">{{ item.dueDate }}</div>
-        </div>
-        <div class="column">
-          <div class="row column-header" *ngIf="id === 0">Status</div>
-          <div class="row">{{ item.status }}</div>
-        </div>
-        <div class="column">
-          <div
-            class="row column-header"
-            style="border-right: 0px"
-            *ngIf="id === 0"
-          >
-            Actions
+    <div *ngIf="isLoading" [class.loading-box]="isLoading">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+
+    <div *ngIf="assignmentsList$ | async as assignmentsList; else errorBox">
+      <div class="assignment-details">
+        <div
+          class="custom-table"
+          *ngFor="let item of assignmentsList; let id = index"
+        >
+          <div class="column">
+            <div class="row column-header" *ngIf="id === 0">ID</div>
+            <div class="row">{{ item.assignmentID }}</div>
           </div>
-          <div class="row" style="border-right: 0px">
-            <div class="action-button" (click)="onEditButtonClicked(item.id)">
-              <img
-                title="Edit Assignment"
-                src="assets/icons/EditBlue.svg"
-                alt="Edit Assignment"
-              />
+          <div class="column">
+            <div class="row column-header" *ngIf="id === 0">Title</div>
+            <div class="row">{{ item.assignmentName }}</div>
+          </div>
+          <div class="column">
+            <div class="row column-header" *ngIf="id === 0">Due Date</div>
+            <div class="row">{{ item.assignmentDueDate | date }}</div>
+          </div>
+          <div class="column">
+            <div class="row column-header" *ngIf="id === 0">Status</div>
+            <div class="row">{{ item.assignmentStatus }}</div>
+          </div>
+          <div class="column">
+            <div
+              class="row column-header"
+              style="border-right: 0px"
+              *ngIf="id === 0"
+            >
+              Actions
             </div>
-            <div class="verticle-bar"></div>
-            <div class="action-button" (click)="onDeleteButtonClicked(item.id)">
-              <img
-                title="Delete Assignment"
-                src="assets/icons/Delete.svg"
-                alt="Delete Assignment"
-              />
+            <div class="row" style="border-right: 0px">
+              <div class="action-button" (click)="onEditButtonClicked(item)">
+                <img
+                  title="Edit Assignment"
+                  src="assets/icons/EditBlue.svg"
+                  alt="Edit Assignment"
+                />
+              </div>
+              <div class="verticle-bar"></div>
+              <div class="action-button" (click)="onDeleteButtonClicked(item)">
+                <img
+                  title="Delete Assignment"
+                  src="assets/icons/Delete.svg"
+                  alt="Delete Assignment"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <ng-template #errorBox>
+      <p class="errorBox" *ngIf="errorMessage">
+        <img src="assets/icons/ErrorCross.svg" alt="error" />
+        {{ errorMessage }}
+      </p>
+    </ng-template>
   </div>
 </div>
