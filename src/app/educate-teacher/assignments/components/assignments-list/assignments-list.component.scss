@@ -64,5 +64,25 @@ $table_border: 1px solid #000;
         }
       }
     }
+
+    .loading-box {
+      min-height: 284px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .errorBox {
+      padding: 0 33px;
+      font-family: "Karla";
+      font-size: 24px;
+      font-weight: 500;
+      color: #ff004c;
+      display: flex;
+      justify-content: center;
+      img {
+        margin-right: 10px;
+      }
+    }
   }
 }
