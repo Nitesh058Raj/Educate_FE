@@ -1,0 +1,9 @@
+.assignments-container {
+  .side-by-side-cards {
+    display: flex;
+
+    .child-cards {
+      flex: 1;
+    }
+  }
+}
