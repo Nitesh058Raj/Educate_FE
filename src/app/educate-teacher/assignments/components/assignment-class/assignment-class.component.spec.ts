@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HttpClientModule } from '@angular/common/http';
-import { AssignmentsOverviewComponent } from './assignments-overview.component';
+import { AssignmentClassComponent } from './assignment-class.component';
 
-describe('AssignmentsOverviewComponent', () => {
-  let component: AssignmentsOverviewComponent;
-  let fixture: ComponentFixture<AssignmentsOverviewComponent>;
+describe('AssignmentClassComponent', () => {
+  let component: AssignmentClassComponent;
+  let fixture: ComponentFixture<AssignmentClassComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      declarations: [AssignmentsOverviewComponent],
+      declarations: [AssignmentClassComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssignmentsOverviewComponent);
+    fixture = TestBed.createComponent(AssignmentClassComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

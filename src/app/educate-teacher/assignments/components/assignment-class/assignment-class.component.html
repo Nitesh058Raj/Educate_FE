@@ -1,0 +1,32 @@
+<div class="assignment-class-container" appCardStyle="36px 0 0 36px">
+  <div class="assignment-class-header" appCardHeaderStyle>
+    <div>Class</div>
+  </div>
+  <div class="assignment-class-body" appCardBodyStyle>
+    <div *ngIf="isLoading" [class.loading-box]="isLoading">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+
+    <div *ngIf="optionList$ | async as optionList; else errorBox">
+      <div class="dropdown">
+        <select
+          class="dropdown-select"
+          (change)="onDropdownChange()"
+          [(ngModel)]="selectedOption"
+        >
+          <option disabled selected id="placeholder">Select Class</option>
+          <option *ngFor="let option of optionList">
+            {{ option.className }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <ng-template #errorBox>
+      <p class="errorBox" *ngIf="errorMessage">
+        <img src="assets/icons/ErrorCross.svg" alt="error" />
+        {{ errorMessage }}
+      </p>
+    </ng-template>
+  </div>
+</div>

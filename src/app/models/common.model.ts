@@ -65,3 +65,15 @@ export interface ClassDetailsResponseInterface {
   status: string;
   data: ClassDetailsInterface[];
 }
+
+export interface AssignmentCountInterface {
+  total_assignments: number;
+  active_assignments: number;
+}
+
+export interface AssignmentCountResponseInterface {
+  message: string;
+  statusCode: number;
+  status: string;
+  data: AssignmentCountInterface[];
+}
