@@ -77,3 +77,19 @@ export interface AssignmentCountResponseInterface {
   status: string;
   data: AssignmentCountInterface[];
 }
+
+export interface AssignmentInterface {
+  assignmentID: number;
+  classID: number;
+  assignmentName: string;
+  assignmentDescription: string;
+  assignmentDueDate: string;
+  assignmentStatus: string;
+}
+
+export interface AssignmentResponseInterface {
+  message: string;
+  statusCode: number;
+  status: string;
+  data: AssignmentInterface[];
+}

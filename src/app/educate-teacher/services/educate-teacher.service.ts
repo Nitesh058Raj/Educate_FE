@@ -6,6 +6,8 @@ import {
   AnnouncementsResponseInterface,
   AssignmentCountInterface,
   AssignmentCountResponseInterface,
+  AssignmentInterface,
+  AssignmentResponseInterface,
   ClassDetailsInterface,
   ClassDetailsResponseInterface,
   ClassInterface,
@@ -98,6 +100,16 @@ export class EducateTeacherService {
         catchError(this.handleError)
       );
   }
+
+  getAssignmentList$: Observable<AssignmentInterface[]> = this.http
+    .get<AssignmentResponseInterface>(
+      `http://localhost:5000/api/assignment/${this.classId}`
+    )
+    .pipe(
+      map((response) => response.data),
+      tap((data) => console.log('Assignment list: ', data)),
+      catchError(this.handleError)
+    );
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
