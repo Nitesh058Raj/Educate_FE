@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  // TODO: Get the user name from the NgRx store
+  currentUserName = 'Mr. Nikhil';
+
   constructor() {}
+
+  onProfileClick() {
+    // TODO: Open popup to show user profile
+    // * As 'app-header' is shared component, we have to think on this method
+  }
 }
