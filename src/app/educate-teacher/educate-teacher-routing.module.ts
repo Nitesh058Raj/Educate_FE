@@ -19,7 +19,6 @@ const childRoutes: Routes = [
     path: EducateTeacherRoutes.HELP_AND_SUPPORT,
     component: HelpAndSupportsComponent,
   },
-  { path: '**', redirectTo: EducateTeacherRoutes.DASHBOARD },
 ];
 
 const routes: Routes = [
