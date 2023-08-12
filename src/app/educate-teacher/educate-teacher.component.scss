@@ -3,6 +3,10 @@
   flex-direction: column;
   height: 100%;
 
+  .header-container {
+    z-index: 1;
+  }
+
   .body-container {
     display: flex;
     flex: 1;
