@@ -1,3 +1,14 @@
 <div class="header-container">
   <div class="header-title">EDUCATE</div>
+  <div class="header-side-items">
+    <div class="profile-box" (click)="onProfileClick()">
+      <div class="profile-image">
+        <!-- TODO: By default show below user icon, later we will show user image -->
+        <img src="assets/icons/NewUser.svg" alt="profile" />
+      </div>
+      <div class="profile-name">
+        {{ currentUserName }}
+      </div>
+    </div>
+  </div>
 </div>
