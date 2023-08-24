@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import {
   AnnouncementsInterface,
   AnnouncementsResponseInterface,
@@ -36,7 +36,6 @@ export class EducateTeacherService {
       )
       .pipe(
         map((response) => response.data),
-        tap((data) => console.log('School details: ', data)),
         catchError(this.handleError)
       );
   }
@@ -48,7 +47,6 @@ export class EducateTeacherService {
       )
       .pipe(
         map((response) => response.data),
-        tap((data) => console.log('Announcements: ', data)),
         catchError(this.handleError)
       );
   }
@@ -60,7 +58,6 @@ export class EducateTeacherService {
       )
       .pipe(
         map((response) => response.data),
-        tap((data) => console.log('Resources: ', data)),
         catchError(this.handleError)
       );
   }
@@ -72,7 +69,6 @@ export class EducateTeacherService {
       )
       .pipe(
         map((response) => response.data),
-        tap((data) => console.log('Class list: ', data)),
         catchError(this.handleError)
       );
   }
@@ -84,7 +80,6 @@ export class EducateTeacherService {
       )
       .pipe(
         map((response) => response.data),
-        tap((data) => console.log('Class details: ', data)),
         catchError(this.handleError)
       );
   }
@@ -96,7 +91,6 @@ export class EducateTeacherService {
       )
       .pipe(
         map((response) => response.data),
-        tap((data) => console.log('Assignment count: ', data)),
         catchError(this.handleError)
       );
   }
@@ -107,7 +101,6 @@ export class EducateTeacherService {
     )
     .pipe(
       map((response) => response.data),
-      tap((data) => console.log('Assignment list: ', data)),
       catchError(this.handleError)
     );
 
