@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { StoreModule } from '@ngrx/store';
 import { MyClassesComponent } from './my-classes.component';
 
 describe('MyClassesComponent', () => {
@@ -8,9 +9,9 @@ describe('MyClassesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MyClassesComponent ]
-    })
-    .compileComponents();
+      imports: [StoreModule.forRoot({})],
+      declarations: [MyClassesComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

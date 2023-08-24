@@ -1,8 +1,12 @@
 <div class="my-classes-container">
   <div class="side-by-side-cards">
     <app-class-list class="child-cards"></app-class-list>
-    <app-class-details class="child-cards"></app-class-details>
+    <div class="child-cards">
+      <app-class-details *ngIf="displayComponent$ | async"></app-class-details>
+    </div>
   </div>
-  <app-resources></app-resources>
-  <app-class-roster></app-class-roster>
+  <div *ngIf="displayComponent$ | async">
+    <app-resources></app-resources>
+    <app-class-roster></app-class-roster>
+  </div>
 </div>
