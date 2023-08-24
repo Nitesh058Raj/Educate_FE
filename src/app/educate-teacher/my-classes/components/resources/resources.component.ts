@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EMPTY, Observable, catchError, finalize } from 'rxjs';
 import { EducateTeacherService } from 'src/app/educate-teacher/services/educate-teacher.service';
 import { ResourcesInterface } from 'src/app/models/common.model';
@@ -10,6 +10,8 @@ import { ModalService } from 'src/app/shared/services/modal-service/modal.servic
   styleUrls: ['./resources.component.scss'],
 })
 export class ResourcesComponent implements OnInit {
+  @Input() displayComponent: boolean | null = false;
+
   isLoading = true;
   errorMessage = '';
   resources$: Observable<ResourcesInterface[]> | undefined;

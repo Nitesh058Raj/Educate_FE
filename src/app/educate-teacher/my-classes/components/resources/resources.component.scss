@@ -21,6 +21,17 @@
     font-family: "Karla";
     font-size: 24px;
 
+    .no-class-selected {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      font-family: "Karla";
+      font-size: 24px;
+      font-weight: 500;
+      color: #555;
+    }
+
     .loading-box {
       min-height: 284px;
       display: flex;

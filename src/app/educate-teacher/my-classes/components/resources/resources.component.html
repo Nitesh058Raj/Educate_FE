@@ -19,23 +19,30 @@
     </div>
   </div>
   <div class="resources-body" appCardBodyStyle="23px 0px">
-    <div *ngIf="isLoading" [class.loading-box]="isLoading">
-      <app-loading-spinner></app-loading-spinner>
+    <!--TODO: Add logic so first errorMessage will check then below components-->
+    <div *ngIf="!displayComponent; else resourcesComponent">
+      <div class="no-class-selected">Please select your class.</div>
     </div>
 
-    <div
-      class="resources-content"
-      *ngIf="resources$ | async as resourcesList; else errorBox"
-    >
-      <div class="resource" *ngFor="let resource of resourcesList">
-        <a
-          class="resource-name"
-          [href]="resource.resourceUrl"
-          target="_blank"
-          >{{ resource.resourceName }}</a
-        >
+    <ng-template #resourcesComponent>
+      <div *ngIf="isLoading" [class.loading-box]="isLoading">
+        <app-loading-spinner></app-loading-spinner>
       </div>
-    </div>
+
+      <div
+        class="resources-content"
+        *ngIf="resources$ | async as resourcesList; else errorBox"
+      >
+        <div class="resource" *ngFor="let resource of resourcesList">
+          <a
+            class="resource-name"
+            [href]="resource.resourceUrl"
+            target="_blank"
+            >{{ resource.resourceName }}</a
+          >
+        </div>
+      </div>
+    </ng-template>
 
     <!-- <ng-template #notAvailable>
       <p class="not-availble">No resources available</p>
