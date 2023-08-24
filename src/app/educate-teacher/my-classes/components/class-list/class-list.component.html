@@ -15,26 +15,33 @@
     </div>
   </div>
   <div class="class-list-body" appCardBodyStyle>
-    <div *ngIf="isLoading" [class.loading-box]="isLoading">
-      <app-loading-spinner></app-loading-spinner>
+    <div *ngIf="errorMessage$ | async; else errorBox">
+      <div
+        *ngIf="isLoading$ | async as isLoading; else classList"
+        [class.loading-box]="isLoading"
+      >
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <ng-template #classList>
+        <div *ngIf="classList$ | async as classList; else errorBox">
+          <ul class="list">
+            <li class="list-item" *ngFor="let class of classList">
+              <div
+                class="list-box"
+                [class.selected-list-box]="
+                  class.classID === (selectedClassId$ | async)
+                "
+                (click)="onListBoxClick(class.classID)"
+              >
+                <div class="list-text">{{ class.className }}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </ng-template>
     </div>
-
-    <div *ngIf="classList$ | async as classList; else errorBox">
-      <ul class="list">
-        <li class="list-item" *ngFor="let class of classList">
-          <div
-            class="list-box"
-            [class.selected-list-box]="selectedClass === class.className"
-            (click)="onListBoxClick(class.className)"
-          >
-            <div class="list-text">{{ class.className }}</div>
-          </div>
-        </li>
-      </ul>
-    </div>
-
     <ng-template #errorBox>
-      <p class="errorBox" *ngIf="errorMessage">
+      <p class="errorBox" *ngIf="errorMessage$ | async as errorMessage">
         <img src="assets/icons/ErrorCross.svg" alt="error" />
         {{ errorMessage }}
       </p>

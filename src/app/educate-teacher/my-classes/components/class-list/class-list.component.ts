@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPTY, Observable, catchError, finalize } from 'rxjs';
-import { EducateTeacherService } from 'src/app/educate-teacher/services/educate-teacher.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { ClassInterface } from 'src/app/models/common.model';
 import { ModalService } from 'src/app/shared/services/modal-service/modal.service';
+import { State } from '../../state';
+import { ClassListActions } from '../../state/actions';
+import { ClassListSelectors } from '../../state/selectors';
 
 @Component({
   selector: 'app-class-list',
@@ -10,30 +13,41 @@ import { ModalService } from 'src/app/shared/services/modal-service/modal.servic
   styleUrls: ['./class-list.component.scss'],
 })
 export class ClassListComponent implements OnInit {
-  isLoading: boolean = true;
-  errorMessage: string = '';
-  classList$: Observable<ClassInterface[]> | undefined;
-
-  selectedClass: string = '';
+  classList$: Observable<ClassInterface[] | null> | undefined;
+  isLoading$: Observable<boolean> | undefined;
+  errorMessage$: Observable<string | null> | null = null;
+  selectedClassId$: Observable<number | null> | undefined;
+  tempClassId: number | null = null;
 
   constructor(
     private modalService: ModalService,
-    private readonly educateTeacherService: EducateTeacherService
+    private store: Store<State>
   ) {}
 
   ngOnInit(): void {
-    this.classList$ = this.educateTeacherService.getClassList().pipe(
-      catchError((err) => {
-        this.errorMessage = err;
-        return EMPTY;
-      }),
-      finalize(() => (this.isLoading = false))
+    this.store.dispatch(ClassListActions.loadClassList());
+    this.isLoading$ = this.store.select(ClassListSelectors.getClassListLoading);
+
+    this.classList$ = this.store.select(ClassListSelectors.getClassList);
+
+    this.errorMessage$ = this.store.select(
+      ClassListSelectors.getClassListError
     );
+
+    this.selectedClassId$ = this.store.select(
+      ClassListSelectors.getCurrentClassId
+    );
+
+    this.selectedClassId$.subscribe((id) => {
+      this.tempClassId = id;
+    });
   }
 
-  onListBoxClick(item: string) {
-    if (this.selectedClass !== item) {
-      this.selectedClass = item;
+  onListBoxClick(id: number) {
+    if (this.tempClassId !== id) {
+      this.store.dispatch(ClassListActions.setCurrentClass({ classId: id }));
+      this.tempClassId = id;
+
       // TODO: Write logic for calling the API of getting required data
       // Here insted of item we can use classId from the classList$
     }
