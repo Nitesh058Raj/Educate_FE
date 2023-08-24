@@ -8,22 +8,29 @@
     </div>
   </div>
   <div class="class-details-body" appCardBodyStyle>
-    <div *ngIf="isLoading" [class.loading-box]="isLoading">
-      <app-loading-spinner></app-loading-spinner>
+    <!--TODO: Add logic so first errorMessage will check then below components-->
+    <div *ngIf="!displayComponent; else classDetailComponent">
+      <div class="no-class-selected">Please select your class.</div>
     </div>
 
-    <div *ngIf="classDetails$ | async as classDetails; else errorBox">
-      <div class="detail-row class-name">
-        <div class="label">Class Name:</div>
-        <div class="value">{{ classDetails.className }}</div>
+    <ng-template #classDetailComponent>
+      <div *ngIf="isLoading" [class.loading-box]="isLoading">
+        <app-loading-spinner></app-loading-spinner>
       </div>
-      <div class="detail-row">
-        <div class="label">Class Description:</div>
-        <div class="value class-description">
-          {{ classDetails.classDescription }}
+
+      <div *ngIf="classDetails$ | async as classDetails; else errorBox">
+        <div class="detail-row class-name">
+          <div class="label">Class Name:</div>
+          <div class="value">{{ classDetails.className }}</div>
+        </div>
+        <div class="detail-row">
+          <div class="label">Class Description:</div>
+          <div class="value class-description">
+            {{ classDetails.classDescription }}
+          </div>
         </div>
       </div>
-    </div>
+    </ng-template>
 
     <ng-template #errorBox>
       <p class="errorBox" *ngIf="errorMessage">
