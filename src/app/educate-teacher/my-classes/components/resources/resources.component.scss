@@ -70,10 +70,16 @@
       }
     }
 
-    .not-availble {
-      text-align: center;
+    .no-resources {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      font-family: "Karla";
+      font-size: 24px;
+      font-weight: 500;
+      color: #555;
     }
-
     .errorBox {
       padding: 10px;
       color: #ff004c;
