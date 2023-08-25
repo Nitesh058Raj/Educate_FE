@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="class-list-body" appCardBodyStyle>
-    <div *ngIf="errorMessage$ | async; else errorBox">
+    <div *ngIf="!(errorMessage$ | async); else errorBox">
       <div
         *ngIf="isLoading$ | async as isLoading; else classList"
         [class.loading-box]="isLoading"

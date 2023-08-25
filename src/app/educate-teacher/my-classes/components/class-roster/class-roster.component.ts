@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-class-roster',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./class-roster.component.scss'],
 })
 export class ClassRosterComponent implements OnInit {
+  @Input() displayComponent: boolean | null = false;
+
   studentDetails: {
     id: number;
     name: string;
