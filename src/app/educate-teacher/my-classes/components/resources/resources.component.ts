@@ -1,8 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { EMPTY, Observable, catchError, finalize } from 'rxjs';
-import { EducateTeacherService } from 'src/app/educate-teacher/services/educate-teacher.service';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { ResourcesInterface } from 'src/app/models/common.model';
 import { ModalService } from 'src/app/shared/services/modal-service/modal.service';
+import { State } from '../../state';
+import { ClassListSelectors, ResourcesSelectors } from '../../state/selectors';
 
 @Component({
   selector: 'app-resources',
@@ -10,10 +12,9 @@ import { ModalService } from 'src/app/shared/services/modal-service/modal.servic
   styleUrls: ['./resources.component.scss'],
 })
 export class ResourcesComponent implements OnInit {
-  @Input() displayComponent: boolean | null = false;
-
-  isLoading = true;
-  errorMessage = '';
+  displayComponent$: Observable<boolean> | undefined;
+  isLoading$: Observable<boolean> | undefined;
+  errorMessage$: Observable<string | null> | null = null;
   resources$: Observable<ResourcesInterface[]> | undefined;
 
   //pop up variables
@@ -22,16 +23,18 @@ export class ResourcesComponent implements OnInit {
 
   constructor(
     private modalService: ModalService,
-    private readonly educateTeacherService: EducateTeacherService
+    private store: Store<State>
   ) {}
 
   ngOnInit(): void {
-    this.resources$ = this.educateTeacherService.getResources().pipe(
-      catchError((err) => {
-        this.errorMessage = err;
-        return EMPTY;
-      }),
-      finalize(() => (this.isLoading = false))
+    this.displayComponent$ = this.store.select(
+      ClassListSelectors.getDisplayComponent
+    );
+    this.resources$ = this.store.select(ResourcesSelectors.getResources);
+    this.isLoading$ = this.store.select(ResourcesSelectors.getLoading);
+    // errorMessage for resources component is not required
+    this.errorMessage$ = this.store.select(
+      ClassListSelectors.getClassListError
     );
   }
 

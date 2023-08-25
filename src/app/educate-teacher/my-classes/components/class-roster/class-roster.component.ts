@@ -1,4 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { State } from '../../state';
+import { ClassListSelectors } from '../../state/selectors';
 
 @Component({
   selector: 'app-class-roster',
@@ -6,7 +10,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./class-roster.component.scss'],
 })
 export class ClassRosterComponent implements OnInit {
-  @Input() displayComponent: boolean | null = false;
+  displayComponent$: Observable<boolean | null> | undefined;
+  errorMessage$: Observable<string | null> | undefined;
 
   studentDetails: {
     id: number;
@@ -27,7 +32,15 @@ export class ClassRosterComponent implements OnInit {
       contact: 87654321,
     },
   ];
-  constructor() {}
+  constructor(private store: Store<State>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.displayComponent$ = this.store.select(
+      ClassListSelectors.getDisplayComponent
+    );
+
+    this.errorMessage$ = this.store.select(
+      ClassListSelectors.getClassListError
+    );
+  }
 }

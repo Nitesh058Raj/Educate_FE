@@ -1,13 +1,8 @@
 <div class="my-classes-container">
   <div class="side-by-side-cards">
     <app-class-list class="child-cards"></app-class-list>
-    <app-class-details
-      class="child-cards"
-      [displayComponent]="displayComponent$ | async"
-    ></app-class-details>
+    <app-class-details class="child-cards"></app-class-details>
   </div>
-  <app-resources [displayComponent]="displayComponent$ | async"></app-resources>
-  <app-class-roster
-    [displayComponent]="displayComponent$ | async"
-  ></app-class-roster>
+  <app-resources></app-resources>
+  <app-class-roster></app-class-roster>
 </div>

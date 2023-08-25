@@ -51,10 +51,10 @@ export class EducateTeacherService {
       );
   }
 
-  getResources(): Observable<ResourcesInterface[]> {
+  getResources(classId: number): Observable<ResourcesInterface[]> {
     return this.http
       .get<ResourcesResponseInterface>(
-        `http://localhost:5000/api/resources/${this.classId}`
+        `http://localhost:5000/api/resources/${classId}`
       )
       .pipe(
         map((response) => response.data),
@@ -73,10 +73,10 @@ export class EducateTeacherService {
       );
   }
 
-  getClassDetails(): Observable<ClassDetailsInterface[]> {
+  getClassDetails(classId: number): Observable<ClassDetailsInterface[]> {
     return this.http
       .get<ClassDetailsResponseInterface>(
-        `http://localhost:5000/api/class/${this.classId}`
+        `http://localhost:5000/api/class/${classId}`
       )
       .pipe(
         map((response) => response.data),

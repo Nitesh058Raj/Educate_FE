@@ -10,3 +10,13 @@ export const getClassDetails = createSelector(
   getMyClassesFeatureState,
   (state) => state.classDetails.details
 );
+
+export const getLoading = createSelector(
+  getMyClassesFeatureState,
+  (state) => state.classDetails.loading
+);
+
+export const getError = createSelector(
+  getMyClassesFeatureState,
+  (state) => state.classDetails.error
+);

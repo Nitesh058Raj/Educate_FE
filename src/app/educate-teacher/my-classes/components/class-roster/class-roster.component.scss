@@ -16,6 +16,19 @@ $table_border: 1px solid #000;
       color: #555;
     }
 
+    .errorBox {
+      padding: 0 32px;
+      font-family: "Karla";
+      font-weight: 500;
+      font-size: 24px;
+      color: #ff004c;
+      display: flex;
+      justify-content: center;
+      img {
+        margin-right: 10px;
+      }
+    }
+
     .buttons {
       display: flex;
       justify-content: flex-end;

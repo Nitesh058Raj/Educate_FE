@@ -45,11 +45,8 @@ export class ClassListComponent implements OnInit {
 
   onListBoxClick(id: number) {
     if (this.tempClassId !== id) {
-      this.store.dispatch(ClassListActions.setCurrentClass({ classId: id }));
       this.tempClassId = id;
-
-      // TODO: Write logic for calling the API of getting required data
-      // Here insted of item we can use classId from the classList$
+      this.store.dispatch(ClassListActions.setCurrentClass({ classId: id }));
     }
   }
 

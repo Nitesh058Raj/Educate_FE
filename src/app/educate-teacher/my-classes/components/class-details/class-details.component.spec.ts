@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 import { ClassDetailsComponent } from './class-details.component';
 
 describe('ClassDetailsComponent', () => {
@@ -9,7 +10,7 @@ describe('ClassDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpClientModule, StoreModule.forRoot({})],
       declarations: [ClassDetailsComponent],
     }).compileComponents();
   });

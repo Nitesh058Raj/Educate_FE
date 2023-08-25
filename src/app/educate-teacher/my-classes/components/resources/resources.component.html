@@ -19,36 +19,41 @@
     </div>
   </div>
   <div class="resources-body" appCardBodyStyle="23px 0px">
-    <!--TODO: Add logic so first errorMessage will check then below components-->
-    <div *ngIf="!displayComponent; else resourcesComponent">
-      <div class="no-class-selected">Please select your class.</div>
-    </div>
-
-    <ng-template #resourcesComponent>
-      <div *ngIf="isLoading" [class.loading-box]="isLoading">
-        <app-loading-spinner></app-loading-spinner>
+    <div *ngIf="!(errorMessage$ | async); else errorBox">
+      <div *ngIf="!(displayComponent$ | async); else Loading">
+        <div class="no-class-selected">Please select your class.</div>
       </div>
 
-      <div
-        class="resources-content"
-        *ngIf="resources$ | async as resourcesList; else errorBox"
-      >
-        <div class="resource" *ngFor="let resource of resourcesList">
-          <a
-            class="resource-name"
-            [href]="resource.resourceUrl"
-            target="_blank"
-            >{{ resource.resourceName }}</a
-          >
+      <ng-template #Loading>
+        <div
+          *ngIf="isLoading$ | async as isLoading; else resourcesComponent"
+          [class.loading-box]="isLoading"
+        >
+          <app-loading-spinner></app-loading-spinner>
         </div>
-      </div>
-    </ng-template>
+      </ng-template>
 
-    <!-- <ng-template #notAvailable>
-      <p class="not-availble">No resources available</p>
-    </ng-template> -->
+      <ng-template #resourcesComponent>
+        <div
+          class="resources-content"
+          *ngIf="(resources$ | async)?.length; else noResourcesBox"
+        >
+          <div class="resource" *ngFor="let resource of resources$ | async">
+            <a
+              class="resource-name"
+              [href]="resource.resourceUrl"
+              target="_blank"
+              >{{ resource.resourceName }}</a
+            >
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <ng-template #noResourcesBox>
+      <div class="no-resources">No resources added.</div>
+    </ng-template>
     <ng-template #errorBox>
-      <p class="errorBox" *ngIf="errorMessage">
+      <p class="errorBox" *ngIf="errorMessage$ | async as errorMessage">
         <img src="assets/icons/ErrorCross.svg" alt="error" />
         {{ errorMessage }}
       </p>

@@ -1,7 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { MyClassesState } from '..';
-import { ClassListActions } from '../actions';
+import {
+  ClassDetailsActions,
+  ClassListActions,
+  ResourcesActions,
+} from '../actions';
 
 // initial state
 const initialState: MyClassesState = {
@@ -27,6 +31,7 @@ const initialState: MyClassesState = {
 // reducer
 export const myClassesReducer = createReducer<MyClassesState>(
   initialState,
+  // Class List
   on(ClassListActions.loadClassList, (state): MyClassesState => {
     return {
       ...state,
@@ -63,6 +68,76 @@ export const myClassesReducer = createReducer<MyClassesState>(
       ...state,
       displayComponent: true,
       selectedClassId: action.classId,
+    };
+  }),
+
+  // Class Details
+  on(ClassDetailsActions.loadClassDetails, (state): MyClassesState => {
+    return {
+      ...state,
+      classDetails: {
+        ...state.classDetails,
+        loading: true,
+        error: null,
+      },
+    };
+  }),
+  on(
+    ClassDetailsActions.loadClassDetailsSuccess,
+    (state, action): MyClassesState => {
+      return {
+        ...state,
+        classDetails: {
+          ...state.classDetails,
+          loading: false,
+          details: action.classDetails,
+        },
+      };
+    }
+  ),
+  on(
+    ClassDetailsActions.loadClassDetailsFailure,
+    (state, action): MyClassesState => {
+      return {
+        ...state,
+        classDetails: {
+          details: null,
+          loading: false,
+          error: action.error,
+        },
+      };
+    }
+  ),
+
+  // Resources
+  on(ResourcesActions.loadResources, (state): MyClassesState => {
+    return {
+      ...state,
+      resources: {
+        ...state.resources,
+        loading: true,
+        error: null,
+      },
+    };
+  }),
+  on(ResourcesActions.loadResourcesSuccess, (state, action): MyClassesState => {
+    return {
+      ...state,
+      resources: {
+        ...state.resources,
+        loading: false,
+        list: action.resources,
+      },
+    };
+  }),
+  on(ResourcesActions.loadResourcesFailure, (state, action): MyClassesState => {
+    return {
+      ...state,
+      resources: {
+        list: [],
+        loading: false,
+        error: action.error,
+      },
     };
   })
 );
