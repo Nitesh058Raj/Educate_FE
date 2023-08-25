@@ -8,32 +8,35 @@
     </div>
   </div>
   <div class="class-details-body" appCardBodyStyle>
-    <!--TODO: Add logic so first errorMessage will check then below components-->
-    <div *ngIf="!displayComponent; else classDetailComponent">
-      <div class="no-class-selected">Please select your class.</div>
-    </div>
-
-    <ng-template #classDetailComponent>
-      <div *ngIf="isLoading" [class.loading-box]="isLoading">
-        <app-loading-spinner></app-loading-spinner>
+    <div *ngIf="!(errorMessage$ | async); else errorBox">
+      <div *ngIf="!(displayComponent$ | async); else Loading">
+        <div class="no-class-selected">Please select your class.</div>
       </div>
-
-      <div *ngIf="classDetails$ | async as classDetails; else errorBox">
-        <div class="detail-row class-name">
-          <div class="label">Class Name:</div>
-          <div class="value">{{ classDetails.className }}</div>
+      <ng-template #Loading>
+        <div
+          *ngIf="isLoading$ | async as isLoading; else classDetailComponent"
+          [class.loading-box]="isLoading"
+        >
+          <app-loading-spinner></app-loading-spinner>
         </div>
-        <div class="detail-row">
-          <div class="label">Class Description:</div>
-          <div class="value class-description">
-            {{ classDetails.classDescription }}
+      </ng-template>
+      <ng-template #classDetailComponent>
+        <div *ngIf="classDetails$ | async as classDetails; else errorBox">
+          <div class="detail-row class-name">
+            <div class="label">Class Name:</div>
+            <div class="value">{{ classDetails.className }}</div>
+          </div>
+          <div class="detail-row">
+            <div class="label">Class Description:</div>
+            <div class="value class-description">
+              {{ classDetails.classDescription }}
+            </div>
           </div>
         </div>
-      </div>
-    </ng-template>
-
+      </ng-template>
+    </div>
     <ng-template #errorBox>
-      <p class="errorBox" *ngIf="errorMessage">
+      <p class="errorBox" *ngIf="errorMessage$ | async as errorMessage">
         <img src="assets/icons/ErrorCross.svg" alt="error" />
         {{ errorMessage }}
       </p>

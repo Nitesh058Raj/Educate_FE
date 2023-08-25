@@ -1,8 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { EMPTY, Observable, catchError, finalize, map, tap } from 'rxjs';
-import { EducateTeacherService } from 'src/app/educate-teacher/services/educate-teacher.service';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { ClassDetailsInterface } from 'src/app/models/common.model';
 import { ModalService } from 'src/app/shared/services/modal-service/modal.service';
+import { State } from '../../state';
+import {
+  ClassDetailsSelectors,
+  ClassListSelectors,
+} from '../../state/selectors';
 
 @Component({
   selector: 'app-class-details',
@@ -10,11 +15,10 @@ import { ModalService } from 'src/app/shared/services/modal-service/modal.servic
   styleUrls: ['./class-details.component.scss'],
 })
 export class ClassDetailsComponent implements OnInit {
-  @Input() displayComponent: boolean | null = false;
-
-  isLoading = true;
-  errorMessage = '';
-  classDetails$: Observable<ClassDetailsInterface> | undefined;
+  displayComponent$: any;
+  isLoading$: Observable<boolean> | undefined;
+  errorMessage$: Observable<string | null> | null = null;
+  classDetails$: Observable<ClassDetailsInterface | null> | undefined;
 
   // Edit popup variables
   editclassName: string = '';
@@ -22,21 +26,22 @@ export class ClassDetailsComponent implements OnInit {
 
   constructor(
     private modalService: ModalService,
-    private readonly educateTeacherService: EducateTeacherService
+    private store: Store<State>
   ) {}
 
   ngOnInit(): void {
-    this.classDetails$ = this.educateTeacherService.getClassDetails().pipe(
-      map((data) => data[0]),
-      tap((data) => {
-        this.editclassName = data.className;
-        this.editclassDescription = data.classDescription;
-      }),
-      catchError((err) => {
-        this.errorMessage = err;
-        return EMPTY;
-      }),
-      finalize(() => (this.isLoading = false))
+    this.displayComponent$ = this.store.select(
+      ClassListSelectors.getDisplayComponent
+    );
+
+    this.classDetails$ = this.store.select(
+      ClassDetailsSelectors.getClassDetails
+    );
+    this.isLoading$ = this.store.select(ClassDetailsSelectors.getLoading);
+
+    // errorMessage for class details component is not required
+    this.errorMessage$ = this.store.select(
+      ClassListSelectors.getClassListError
     );
   }
 
