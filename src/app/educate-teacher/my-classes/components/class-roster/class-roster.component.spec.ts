@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ClassRosterComponent } from './class-roster.component';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 describe('ClassRosterComponent', () => {
   let component: ClassRosterComponent;
@@ -8,9 +10,9 @@ describe('ClassRosterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClassRosterComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule, StoreModule.forRoot({})],
+      declarations: [ClassRosterComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
