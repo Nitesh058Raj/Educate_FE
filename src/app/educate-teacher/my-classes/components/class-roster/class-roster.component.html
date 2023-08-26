@@ -1,5 +1,23 @@
 <div class="class-roster-container" appCardStyle="36px">
-  <div class="class-roster-header" appCardHeaderStyle>Class Roster</div>
+  <div class="class-roster-header" appCardHeaderStyle>
+    <div>Class Roster</div>
+    <div class="header-actions">
+      <div class="action-button" (click)="openModal('add-student-modal')">
+        <img
+          title="Add Student"
+          src="assets/icons/Plus.svg"
+          alt="Add Student"
+        />
+      </div>
+      <div class="action-button" (click)="openModal('remove-student-modal')">
+        <img
+          title="Remove Student from class"
+          src="assets/icons/Minus.svg"
+          alt="Remove Student"
+        />
+      </div>
+    </div>
+  </div>
   <div class="class-roster-body" appCardBodyStyle>
     <div *ngIf="!(errorMessage$ | async); else errorBox">
       <div *ngIf="!(displayComponent$ | async); else classRosterComponent">
@@ -51,3 +69,49 @@
     </ng-template>
   </div>
 </div>
+
+<app-popup-modal id="add-student-modal">
+  <div headerContent>Add Student to class</div>
+  <div content></div>
+  <div footerContent>
+    <app-common-button
+      [text]="'Cancel'"
+      [variant]="'outlined'"
+      [disabled]="false"
+      (BtnClickEmitter)="handleOnClickEvent($event, 'add-student-modal')"
+    ></app-common-button>
+
+    <app-common-button
+      [variant]="'filled'"
+      [disabled]="false"
+      [text]="'Submit'"
+      [bgColor]="'#268aff'"
+      (BtnClickEmitter)="handleOnClickEvent($event, 'add-student-modal')"
+    ></app-common-button>
+  </div>
+</app-popup-modal>
+
+<app-popup-modal id="remove-student-modal">
+  <div headerContent>Remove Student from class</div>
+  <div content>
+    <div class="remove-student-container">
+      Are you sure you want to remove the student?
+    </div>
+  </div>
+  <div footerContent>
+    <app-common-button
+      [text]="'Cancel'"
+      [variant]="'outlined'"
+      [disabled]="false"
+      (BtnClickEmitter)="handleOnClickEvent($event, 'remove-student-modal')"
+    ></app-common-button>
+
+    <app-common-button
+      [variant]="'filled'"
+      [disabled]="false"
+      [text]="'Remove'"
+      [bgColor]="'#268aff'"
+      (BtnClickEmitter)="handleOnClickEvent($event, 'remove-student-modal')"
+    ></app-common-button>
+  </div>
+</app-popup-modal>
