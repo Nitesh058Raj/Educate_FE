@@ -108,6 +108,42 @@ export const myClassesReducer = createReducer<MyClassesState>(
       };
     }
   ),
+  on(ClassDetailsActions.updateClassDetails, (state): MyClassesState => {
+    return {
+      ...state,
+      classDetails: {
+        ...state.classDetails,
+        loading: true,
+        error: null,
+      },
+    };
+  }),
+  on(
+    ClassDetailsActions.updateClassDetailsSuccess,
+    (state, action): MyClassesState => {
+      return {
+        ...state,
+        classDetails: {
+          ...state.classDetails,
+          loading: false,
+          details: action.classDetails,
+        },
+      };
+    }
+  ),
+  on(
+    ClassDetailsActions.updateClassDetailsFailure,
+    (state, action): MyClassesState => {
+      return {
+        ...state,
+        classDetails: {
+          ...state.classDetails,
+          loading: false,
+          error: action.error,
+        },
+      };
+    }
+  ),
 
   // Resources
   on(ResourcesActions.loadResources, (state): MyClassesState => {
