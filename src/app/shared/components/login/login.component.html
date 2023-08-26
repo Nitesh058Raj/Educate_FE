@@ -2,17 +2,21 @@
   <div class="white-container">
     <div class="login-header">EDUCATE</div>
     <hr class="login-horizontal-line" />
-    <div class="login-content">
-      <div class="login-username">
-        <div class="label">Username</div>
-        <input type="email" class="input" />
+    <form #form="ngForm">
+      <div class="login-content">
+        <div class="login-username">
+          <div class="label">Username</div>
+          <input type="email" class="input" name="email" ngModel />
+        </div>
+        <div class="login-password">
+          <div class="label">Password</div>
+          <input type="password" class="input" name="password" ngModel />
+        </div>
+        <div class="login-forgot-text">Forgot password?</div>
       </div>
-      <div class="login-password">
-        <div class="label">Password</div>
-        <input type="password" class="input" />
-      </div>
-      <div class="login-forgot-text">Forgot password?</div>
-    </div>
+    </form>
+    {{ form.value | json }}
+
     <div class="login-button">Login</div>
   </div>
 </div>
