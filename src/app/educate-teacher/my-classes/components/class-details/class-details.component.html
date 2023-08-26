@@ -50,13 +50,25 @@
     <div class="edit-class-container">
       <div class="edit-class-name">
         <div class="edit-label">Edit Class:</div>
-        <input type="text" [(ngModel)]="editclassName" />
+        <input type="text" [(ngModel)]="editedclassName" />
       </div>
       <div class="edit-class-description">
         <div class="edit-label">Edit Description:</div>
-        <textarea type="text" [(ngModel)]="editclassDescription"></textarea>
+        <textarea type="text" [(ngModel)]="editedclassDescription"></textarea>
       </div>
     </div>
+    <ng-container *ngIf="editedclassName == '' || editedclassDescription == ''">
+      <div class="errorBox">
+        <img src="assets/icons/ErrorCross.svg" alt="error" />
+        Please fill all the fields.
+      </div>
+    </ng-container>
+    <ng-container *ngIf="errorMessagePopup !== null">
+      <div class="errorBox">
+        <img src="assets/icons/ErrorCross.svg" alt="error" />
+        {{ errorMessagePopup }}
+      </div>
+    </ng-container>
   </div>
   <div footerContent>
     <app-common-button
@@ -68,7 +80,7 @@
 
     <app-common-button
       [variant]="'filled'"
-      [disabled]="false"
+      [disabled]="isEnableEditButton()"
       [text]="'Update'"
       [bgColor]="'#268aff'"
       (BtnClickEmitter)="handleOnClickEvent($event, 'edit-class-modal')"
