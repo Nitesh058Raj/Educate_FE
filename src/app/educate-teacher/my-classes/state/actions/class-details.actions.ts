@@ -15,3 +15,24 @@ export const loadClassDetailsFailure = createAction(
   '[Class Details] Load Class Details Failure',
   props<{ error: string }>()
 );
+
+export const updateClassDetails = createAction(
+  '[Class Details] Update Class Details',
+  props<{
+    classDetails: {
+      classId: number | null;
+      classDescription: string;
+      className: string;
+    };
+  }>()
+);
+
+export const updateClassDetailsSuccess = createAction(
+  '[Class Details] Update Class Details Success',
+  props<{ classDetails: ClassDetailsInterface }>()
+);
+
+export const updateClassDetailsFailure = createAction(
+  '[Class Details] Update Class Details Failure',
+  props<{ error: string }>()
+);
