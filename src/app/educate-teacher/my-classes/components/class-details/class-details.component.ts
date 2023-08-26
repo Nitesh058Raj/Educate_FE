@@ -27,7 +27,7 @@ export class ClassDetailsComponent implements OnInit {
   initclassDescription: string = '';
   editedclassName: string = '';
   editedclassDescription: string = '';
-  errorMessagePopUp$: Observable<string | null> | null = null;
+  errorMessagePopup$: Observable<string | null> | null = null;
 
   // temp vars
   tempClassId: number | null = null;
@@ -75,9 +75,9 @@ export class ClassDetailsComponent implements OnInit {
       ClassListSelectors.getClassListError
     );
 
-    this.errorMessagePopUp$ = this.store.select(ClassDetailsSelectors.getError);
+    this.errorMessagePopup$ = this.store.select(ClassDetailsSelectors.getError);
 
-    this.errorMessagePopUp$.subscribe((data) => {
+    this.errorMessagePopup$.subscribe((data) => {
       if (data) {
         this.errorMessagePopup = data;
         this.cdr.detectChanges();
@@ -125,7 +125,7 @@ export class ClassDetailsComponent implements OnInit {
           })
         );
 
-        if (this.errorMessagePopUp$ == null) {
+        if (this.errorMessagePopup == null) {
           this.closeModal(modalId);
         }
         break;
