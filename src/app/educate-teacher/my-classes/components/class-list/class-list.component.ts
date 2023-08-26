@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -17,6 +17,7 @@ import { ClassListSelectors } from '../../state/selectors';
   styleUrls: ['./class-list.component.scss'],
 })
 export class ClassListComponent implements OnInit {
+  @ViewChild('form') form: any;
   classList$: Observable<ClassInterface[] | null> | undefined;
   isLoading$: Observable<boolean> | undefined;
   errorMessage$: Observable<string | null> | null = null;
@@ -58,7 +59,17 @@ export class ClassListComponent implements OnInit {
     }
   }
 
-  submitClassForm(form: NgForm) {}
+  resetClassForm() {
+    this.form.resetForm(); // Reset form state and clear validity
+    this.classFormData = {
+      className: '',
+      classDescription: '',
+    };
+  }
+
+  submitClassForm(form: NgForm) {
+    this.resetClassForm();
+  }
 
   openModal(id: string) {
     this.modalService.open(id);
@@ -74,6 +85,7 @@ export class ClassListComponent implements OnInit {
         this.closeModal(modalId);
         break;
       case 'Submit':
+        console.log(this.classFormData);
         // TODO: Write logic for calling the API of adding Class
 
         this.closeModal(modalId);
