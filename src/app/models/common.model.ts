@@ -97,4 +97,5 @@ export interface AssignmentResponseInterface {
 export interface LoginFormInterface {
   username: string;
   password: string;
+  role: string;
 }

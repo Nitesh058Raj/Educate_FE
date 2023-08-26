@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
   loginFormData: LoginFormInterface = {
     username: '',
     password: '',
+    role: 'Teacher', // Default choice
   };
 
   constructor() {}

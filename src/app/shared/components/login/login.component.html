@@ -45,6 +45,32 @@
             </div>
           </div>
         </div>
+        <div class="login-as">
+          <div class="label">Login as:</div>
+          <div class="options">
+            <label for="teacher">
+              <input
+                type="radio"
+                name="role"
+                id="teacher"
+                value="Teacher"
+                [(ngModel)]="loginFormData.role"
+                checked
+              />
+              Teacher
+            </label>
+            <label for="student">
+              <input
+                type="radio"
+                name="role"
+                id="student"
+                value="Student"
+                [(ngModel)]="loginFormData.role"
+              />
+              Student
+            </label>
+          </div>
+        </div>
         <div class="login-forgot-text">Forgot password?</div>
       </div>
       <button class="login-button">Login</button>
