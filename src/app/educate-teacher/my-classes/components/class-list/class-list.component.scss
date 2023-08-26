@@ -100,4 +100,49 @@ app-popup-modal {
     font-family: "Karla";
     font-size: 24px;
   }
+
+  .add-class-container {
+    margin: 20px 20px;
+    font-family: "Karla";
+    font-size: 26px;
+
+    .class-label {
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .add-class-name {
+      display: flex;
+      align-items: center;
+
+      input {
+        width: 100%;
+        height: 30px;
+        color: #212121;
+        border: 1px solid #555;
+        border-radius: 5px;
+        padding: 10px;
+        font-family: "Karla";
+        font-size: 24px;
+      }
+    }
+
+    .add-class-description {
+      margin-top: 3%;
+      display: flex;
+      flex-direction: column;
+
+      textarea {
+        height: 100px;
+        padding: 10px;
+        margin-top: 2%;
+        resize: none;
+        color: #212121;
+        border: 1px solid #555;
+        border-radius: 5px;
+        font-family: "Karla";
+        font-size: 24px;
+      }
+    }
+  }
 }
