@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ClassInterface } from 'src/app/models/common.model';
+import {
+  ClassDetailsInterface,
+  ClassInterface,
+} from 'src/app/models/common.model';
 import { ModalService } from 'src/app/shared/services/modal-service/modal.service';
 import { State } from '../../state';
 import { ClassListActions } from '../../state/actions';
@@ -18,6 +22,10 @@ export class ClassListComponent implements OnInit {
   errorMessage$: Observable<string | null> | null = null;
   selectedClassId$: Observable<number | null> | undefined;
   tempClassId: number | null = null;
+  classFormData: ClassDetailsInterface = {
+    className: '',
+    classDescription: '',
+  };
 
   constructor(
     private modalService: ModalService,
@@ -49,6 +57,8 @@ export class ClassListComponent implements OnInit {
       this.store.dispatch(ClassListActions.setCurrentClass({ classId: id }));
     }
   }
+
+  submitClassForm(form: NgForm) {}
 
   openModal(id: string) {
     this.modalService.open(id);

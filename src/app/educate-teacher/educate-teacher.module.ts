@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { AssignmentsModule } from './assignments/assignments.module';
@@ -30,6 +31,7 @@ import { EducateTeacherService } from './services/educate-teacher.service';
   imports: [
     EducateTeacherRoutingModule,
     CommonModule,
+    FormsModule,
     SharedModule,
     DashboardModule,
     MyClassesModule,

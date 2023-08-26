@@ -145,4 +145,10 @@ app-popup-modal {
       }
     }
   }
+
+  .footer-action-buttons {
+    margin: 0 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
