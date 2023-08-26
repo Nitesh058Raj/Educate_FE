@@ -82,7 +82,7 @@
 
         <app-common-button
           [variant]="'filled'"
-          [disabled]="false"
+          [disabled]="form.invalid"
           [text]="'Submit'"
           [bgColor]="'#268aff'"
           (BtnClickEmitter)="handleOnClickEvent($event, 'add-class-modal')"
