@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ClassInterface } from 'src/app/models/common.model';
+import {
+  ClassDetailsInterface,
+  ClassInterface,
+} from 'src/app/models/common.model';
 import { ModalService } from 'src/app/shared/services/modal-service/modal.service';
 import { State } from '../../state';
 import { ClassListActions } from '../../state/actions';
@@ -13,11 +17,16 @@ import { ClassListSelectors } from '../../state/selectors';
   styleUrls: ['./class-list.component.scss'],
 })
 export class ClassListComponent implements OnInit {
+  @ViewChild('form') form: any;
   classList$: Observable<ClassInterface[] | null> | undefined;
   isLoading$: Observable<boolean> | undefined;
   errorMessage$: Observable<string | null> | null = null;
   selectedClassId$: Observable<number | null> | undefined;
   tempClassId: number | null = null;
+  classFormData: ClassDetailsInterface = {
+    className: '',
+    classDescription: '',
+  };
 
   constructor(
     private modalService: ModalService,
@@ -50,6 +59,18 @@ export class ClassListComponent implements OnInit {
     }
   }
 
+  resetClassForm() {
+    this.form.resetForm(); // Reset form state and clear validity
+    this.classFormData = {
+      className: '',
+      classDescription: '',
+    };
+  }
+
+  submitClassForm(form: NgForm) {
+    this.resetClassForm();
+  }
+
   openModal(id: string) {
     this.modalService.open(id);
   }
@@ -64,6 +85,7 @@ export class ClassListComponent implements OnInit {
         this.closeModal(modalId);
         break;
       case 'Submit':
+        console.log(this.classFormData);
         // TODO: Write logic for calling the API of adding Class
 
         this.closeModal(modalId);

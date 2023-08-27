@@ -51,22 +51,44 @@
 
 <app-popup-modal id="add-class-modal">
   <div headerContent>Add Class</div>
-  <div content></div>
-  <div footerContent>
-    <app-common-button
-      [text]="'Cancel'"
-      [variant]="'outlined'"
-      [disabled]="false"
-      (BtnClickEmitter)="handleOnClickEvent($event, 'add-class-modal')"
-    ></app-common-button>
+  <div content>
+    <form #form="ngForm" (ngSubmit)="submitClassForm(form)">
+      <div class="add-class-container">
+        <div class="add-class-name">
+          <div class="class-label">Class name:</div>
+          <input
+            type="text"
+            name="className"
+            [(ngModel)]="classFormData.className"
+            required
+          />
+        </div>
+        <div class="add-class-description">
+          <div class="class-label">Class description:</div>
+          <textarea
+            name="classDescription"
+            [(ngModel)]="classFormData.classDescription"
+            required
+          ></textarea>
+        </div>
+      </div>
+      <div class="footer-action-buttons">
+        <app-common-button
+          [text]="'Cancel'"
+          [variant]="'outlined'"
+          [disabled]="false"
+          (BtnClickEmitter)="handleOnClickEvent($event, 'add-class-modal')"
+        ></app-common-button>
 
-    <app-common-button
-      [variant]="'filled'"
-      [disabled]="false"
-      [text]="'Submit'"
-      [bgColor]="'#268aff'"
-      (BtnClickEmitter)="handleOnClickEvent($event, 'add-class-modal')"
-    ></app-common-button>
+        <app-common-button
+          [variant]="'filled'"
+          [disabled]="form.invalid"
+          [text]="'Submit'"
+          [bgColor]="'#268aff'"
+          (BtnClickEmitter)="handleOnClickEvent($event, 'add-class-modal')"
+        ></app-common-button>
+      </div>
+    </form>
   </div>
 </app-popup-modal>
 

@@ -4,6 +4,7 @@
     [class.outlined]="variant === 'outlined'"
     [class.filled]="variant === 'filled'"
     [disabled]="disabled"
+    [style.cursor]="disabled ? 'not-allowed' : 'pointer'"
     [style.color]="variant === 'filled' ? 'white' : null"
     [style.backgroundColor]="variant === 'filled' ? bgColor : null"
     (click)="onButtonClick()"

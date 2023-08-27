@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { ClassListComponent } from './class-list.component';
 
@@ -9,7 +10,7 @@ describe('ClassListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({})],
+      imports: [StoreModule.forRoot({}), FormsModule],
       declarations: [ClassListComponent],
     }).compileComponents();
   });
