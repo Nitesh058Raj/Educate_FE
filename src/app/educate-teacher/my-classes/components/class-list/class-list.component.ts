@@ -65,6 +65,7 @@ export class ClassListComponent implements OnInit {
 
   resetClassForm() {
     this.form.resetForm(); // Reset form state and clear validity
+    this.responseErrorMessage = ''; // Clear the error message if any
     this.classFormData = {
       className: '',
       classDescription: '',
@@ -109,6 +110,7 @@ export class ClassListComponent implements OnInit {
   handleOnClickEvent(event: any, modalId: string) {
     switch (event) {
       case 'Cancel':
+        this.resetClassForm();
         this.closeModal(modalId);
         break;
       case 'Submit':
