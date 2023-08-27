@@ -52,7 +52,7 @@
 <app-popup-modal id="add-class-modal">
   <div headerContent>Add Class</div>
   <div content>
-    <form #form="ngForm" (ngSubmit)="submitClassForm(form)">
+    <form #form="ngForm">
       <div class="add-class-container">
         <div class="add-class-name">
           <div class="class-label">Class name:</div>
@@ -70,6 +70,12 @@
             [(ngModel)]="classFormData.classDescription"
             required
           ></textarea>
+        </div>
+        <div [hidden]="responseErrorMessage === ''" class="alert-invalid">
+          <div class="errorMsg">
+            <img src="assets/icons/AlertSign.svg" alt="alert" />
+            {{ responseErrorMessage }}
+          </div>
         </div>
       </div>
       <div class="footer-action-buttons">

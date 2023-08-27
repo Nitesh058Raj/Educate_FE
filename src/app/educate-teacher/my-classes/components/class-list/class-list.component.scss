@@ -156,6 +156,20 @@ app-popup-modal {
         outline: none;
       }
     }
+
+    .alert-invalid {
+      .errorMsg {
+        display: flex;
+        align-items: center;
+        color: #ff004c;
+        font-size: 20px;
+        font-family: "Karla";
+        margin-top: 5px;
+        img {
+          margin-right: 5px;
+        }
+      }
+    }
   }
 
   .footer-action-buttons {
