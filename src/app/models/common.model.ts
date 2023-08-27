@@ -42,6 +42,13 @@ export interface ResourcesResponseInterface {
   data: ResourcesInterface[];
 }
 
+export interface CreateClassDataInterface {
+  className: string;
+  classDescription: string;
+  teacherID: number;
+  schoolID: number;
+}
+
 export interface ClassInterface {
   classID: number;
   className: string;
