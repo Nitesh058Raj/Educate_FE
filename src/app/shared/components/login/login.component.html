@@ -2,30 +2,78 @@
   <div class="white-container">
     <div class="login-header">EDUCATE</div>
     <hr class="login-horizontal-line" />
-    <div class="login-content">
-      <div class="login-username">
-        <div class="label">Username</div>
-        <input type="email" class="input" />
-      </div>
-      <div class="login-password">
-        <div class="label">Password</div>
-        <input type="password" class="input" />
-      </div>
-      <div class="login-as">
-        <div class="label">Login as:</div>
-        <div class="options">
-          <label for="teacher">
-            <input type="radio" name="role" id="teacher" value="Teacher" />
-            Teacher
-          </label>
-          <label for="student">
-            <input type="radio" name="role" id="student" value="Student" />
-            Student
-          </label>
+    <form #form="ngForm" (ngSubmit)="onSubmitLoginForm(form)" novalidate>
+      <div class="login-content">
+        <div class="login-username">
+          <div class="label">Username</div>
+          <input
+            type="email"
+            class="input"
+            name="email"
+            required
+            email
+            [(ngModel)]="loginFormData.username"
+            #emailField="ngModel"
+          />
+          <div
+            [hidden]="!form.submitted || emailField.valid"
+            class="alert-invalid"
+          >
+            <div class="errorMsg">
+              <img src="assets/icons/AlertSign.svg" alt="alert" />
+              Username is required
+            </div>
+          </div>
         </div>
+        <div class="login-password">
+          <div class="label">Password</div>
+          <input
+            type="password"
+            class="input"
+            name="password"
+            required
+            [(ngModel)]="loginFormData.password"
+            #passwordField="ngModel"
+          />
+          <div
+            [hidden]="!form.submitted || passwordField.valid"
+            class="alert-invalid"
+          >
+            <div class="errorMsg">
+              <img src="assets/icons/AlertSign.svg" alt="alert" />
+              Password is required
+            </div>
+          </div>
+        </div>
+        <div class="login-as">
+          <div class="label">Login as:</div>
+          <div class="options">
+            <label for="teacher">
+              <input
+                type="radio"
+                name="role"
+                id="teacher"
+                value="Teacher"
+                [(ngModel)]="loginFormData.role"
+                checked
+              />
+              Teacher
+            </label>
+            <label for="student">
+              <input
+                type="radio"
+                name="role"
+                id="student"
+                value="Student"
+                [(ngModel)]="loginFormData.role"
+              />
+              Student
+            </label>
+          </div>
+        </div>
+        <div class="login-forgot-text">Forgot password?</div>
       </div>
-      <div class="login-forgot-text">Forgot password?</div>
-    </div>
-    <div class="login-button">Login</div>
+      <button class="login-button">Login</button>
+    </form>
   </div>
 </div>

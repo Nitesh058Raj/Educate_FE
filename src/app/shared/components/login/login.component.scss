@@ -84,6 +84,26 @@
       .login-forgot-text:hover {
         text-decoration: underline;
       }
+
+      // Form Validation starts from below
+      .ng-invalid.ng-dirty {
+        border: 1px solid rgba(255, 0, 0, 0.5);
+        box-shadow: 0 0 2px red;
+        outline: none;
+      }
+
+      .alert-invalid {
+        .errorMsg {
+          display: flex;
+          align-items: center;
+          color: #ff004c;
+          font-size: 16px;
+          margin-top: 5px;
+          img {
+            margin-right: 5px;
+          }
+        }
+      }
     }
 
     .login-button {

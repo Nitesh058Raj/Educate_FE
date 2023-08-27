@@ -93,3 +93,9 @@ export interface AssignmentResponseInterface {
   status: string;
   data: AssignmentInterface[];
 }
+
+export interface LoginFormInterface {
+  username: string;
+  password: string;
+  role: string;
+}
