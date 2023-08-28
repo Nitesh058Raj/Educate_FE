@@ -68,6 +68,11 @@ export const myClassesReducer = createReducer<MyClassesState>(
       ...state,
       displayComponent: true,
       selectedClassId: action.classId,
+      classDetails: {
+        ...state.classDetails,
+        details: null,
+        error: null,
+      },
     };
   }),
 
@@ -90,6 +95,7 @@ export const myClassesReducer = createReducer<MyClassesState>(
         classDetails: {
           ...state.classDetails,
           loading: false,
+          error: null,
           details: action.classDetails,
         },
       };
@@ -113,7 +119,6 @@ export const myClassesReducer = createReducer<MyClassesState>(
       ...state,
       classDetails: {
         ...state.classDetails,
-        loading: true,
         error: null,
       },
     };
