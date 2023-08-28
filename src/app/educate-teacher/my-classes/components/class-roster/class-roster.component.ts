@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { ModalService } from 'src/app/shared/services/modal-service/modal.service';
 import { State } from '../../state';
 import { ClassListSelectors } from '../../state/selectors';
 
@@ -32,7 +33,11 @@ export class ClassRosterComponent implements OnInit {
       contact: 87654321,
     },
   ];
-  constructor(private store: Store<State>) {}
+
+  constructor(
+    private store: Store<State>,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
     this.displayComponent$ = this.store.select(
@@ -42,5 +47,33 @@ export class ClassRosterComponent implements OnInit {
     this.errorMessage$ = this.store.select(
       ClassListSelectors.getClassListError
     );
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
+
+  handleOnClickEvent(event: any, modalId: string) {
+    switch (event) {
+      case 'Cancel':
+        this.closeModal(modalId);
+        break;
+      case 'Submit':
+        // TODO: Write logic for calling the API of adding Class
+
+        this.closeModal(modalId);
+        break;
+      case 'Remove':
+        // TODO: Write logic for calling the API of removing Class
+
+        this.closeModal(modalId);
+        break;
+      default:
+        break;
+    }
   }
 }
