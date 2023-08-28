@@ -12,6 +12,7 @@ import {
   ClassDetailsResponseInterface,
   ClassInterface,
   ClassResponseInterface,
+  CreateClassDataInterface,
   ResourcesInterface,
   ResourcesResponseInterface,
   SchoolDetailsInterface,
@@ -125,6 +126,13 @@ export class EducateTeacherService {
       map((response) => response.data),
       catchError(this.handleError)
     );
+
+  createNewClass(classsData: CreateClassDataInterface) {
+    return this.http.post('http://localhost:5000/api/class', classsData).pipe(
+      map((response: any) => response),
+      catchError(this.handleError)
+    );
+  }
 
   // Error Handler
   private handleError(err: HttpErrorResponse): Observable<never> {

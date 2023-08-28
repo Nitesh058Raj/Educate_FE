@@ -42,6 +42,13 @@ export interface ResourcesResponseInterface {
   data: ResourcesInterface[];
 }
 
+export interface CreateClassDataInterface {
+  className: string;
+  classDescription: string;
+  teacherID: number;
+  schoolID: number;
+}
+
 export interface ClassInterface {
   classID: number;
   className: string;
@@ -92,4 +99,10 @@ export interface AssignmentResponseInterface {
   statusCode: number;
   status: string;
   data: AssignmentInterface[];
+}
+
+export interface LoginFormInterface {
+  username: string;
+  password: string;
+  role: string;
 }

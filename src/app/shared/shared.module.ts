@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonButtonComponent } from './components/common-button/common-button.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
@@ -23,7 +24,7 @@ import { ModalService } from './services/modal-service/modal.service';
     CommonButtonComponent,
     LoadingSpinnerComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   providers: [ModalService],
   exports: [
     LoginComponent,
