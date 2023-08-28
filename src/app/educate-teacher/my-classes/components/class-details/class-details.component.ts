@@ -1,4 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ClassDetailsInterface } from 'src/app/models/common.model';
@@ -10,12 +15,15 @@ import {
   ClassListSelectors,
 } from '../../state/selectors';
 
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Actions } from '@ngrx/effects';
+
 @Component({
   selector: 'app-class-details',
   templateUrl: './class-details.component.html',
   styleUrls: ['./class-details.component.scss'],
 })
-export class ClassDetailsComponent implements OnInit {
+export class ClassDetailsComponent implements OnInit, AfterContentChecked {
   displayComponent$: any;
   isLoading$: Observable<boolean> | undefined;
   errorMessage$: Observable<string | null> | null = null;
@@ -25,9 +33,10 @@ export class ClassDetailsComponent implements OnInit {
   // Edit popup variables
   initclassName: string = '';
   initclassDescription: string = '';
-  editedclassName: string = '';
-  editedclassDescription: string = '';
+  editedclassName!: FormControl;
+  editedclassDescription!: FormControl;
   errorMessagePopup$: Observable<string | null> | null = null;
+  classDetailsForm!: FormGroup;
 
   // temp vars
   tempClassId: number | null = null;
@@ -36,13 +45,23 @@ export class ClassDetailsComponent implements OnInit {
   constructor(
     private modalService: ModalService,
     private store: Store<State>,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private action$: Actions,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.displayComponent$ = this.store.select(
       ClassListSelectors.getDisplayComponent
     );
+
+    this.editedclassName = this.fb.control('');
+    this.editedclassDescription = this.fb.control('');
+
+    this.classDetailsForm = this.fb.group({
+      editedclassName: this.editedclassName,
+      editedclassDescription: this.editedclassDescription,
+    });
 
     this.classDetails$ = this.store.select(
       ClassDetailsSelectors.getClassDetails
@@ -53,8 +72,10 @@ export class ClassDetailsComponent implements OnInit {
         this.initclassName = data.className;
         this.initclassDescription = data.classDescription;
 
-        this.editedclassName = this.initclassName;
-        this.editedclassDescription = this.initclassDescription;
+        this.classDetailsForm.patchValue({
+          editedclassName: this.initclassName,
+          editedclassDescription: this.initclassDescription,
+        });
       }
     });
 
@@ -85,15 +106,17 @@ export class ClassDetailsComponent implements OnInit {
     });
   }
 
+  ngAfterContentChecked() {
+    this.cdr.detectChanges();
+  }
+
   isEnableEditButton() {
     if (
-      this.initclassName === this.editedclassName &&
-      this.initclassDescription === this.editedclassDescription
-    ) {
-      return true;
-    } else if (
-      this.editedclassName === '' ||
-      this.editedclassDescription === ''
+      this.editedclassName.value === '' ||
+      this.editedclassDescription.value === '' ||
+      this.errorMessagePopup !== null ||
+      (this.initclassName === this.editedclassName.value &&
+        this.initclassDescription === this.editedclassDescription.value)
     ) {
       return true;
     } else {
@@ -102,6 +125,7 @@ export class ClassDetailsComponent implements OnInit {
   }
 
   openModal(id: string) {
+    this.errorMessagePopup = null;
     this.modalService.open(id);
   }
 
@@ -119,15 +143,23 @@ export class ClassDetailsComponent implements OnInit {
           ClassDetailsActions.updateClassDetails({
             classDetails: {
               classId: this.tempClassId,
-              className: this.editedclassName,
-              classDescription: this.editedclassDescription,
+              className: this.editedclassName.value,
+              classDescription: this.editedclassDescription.value,
             },
           })
         );
 
-        if (this.errorMessagePopup == null) {
-          this.closeModal(modalId);
-        }
+        this.action$.subscribe((data: any) => {
+          if (data.type === '[Class Details] Update Class Details Success') {
+            this.closeModal(modalId);
+            this.errorMessagePopup = null;
+            this.cdr.detectChanges();
+          } else if (
+            data.type === '[Class Details] Update Class Details Failure'
+          ) {
+            this.errorMessagePopup = data.error;
+          }
+        });
         break;
       default:
         break;

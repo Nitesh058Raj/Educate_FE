@@ -99,18 +99,21 @@ app-popup-modal {
 
   .errorBox {
     padding: 0 32px;
-    font-family: "Karla";
-    font-weight: 500;
-    font-size: 24px;
-    color: #ff004c;
-    display: flex;
+    margin-top: 5px;
+    .errorMsg {
+      font-family: "Karla";
+      font-size: 20px;
+      color: #ff004c;
+      display: flex;
+      align-items: center;
+    }
     img {
-      margin-right: 10px;
+      margin-right: 5px;
     }
   }
 
   .edit-class-container {
-    margin: 20px 20px;
+    margin: 20px 20px 0px 20px;
     font-family: "Karla";
     font-size: 26px;
 
@@ -152,5 +155,8 @@ app-popup-modal {
         font-size: 24px;
       }
     }
+  }
+  .buttons {
+    margin-top: 20px;
   }
 }
