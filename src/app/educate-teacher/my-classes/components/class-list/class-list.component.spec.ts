@@ -17,7 +17,9 @@ describe('ClassListComponent', () => {
         FormsModule,
         EducateTeacherModule,
         EffectsModule.forRoot([]),
-      , FormsModule],
+        EducateTeacherModule,
+        FormsModule,
+      ],
       declarations: [ClassListComponent],
     }).compileComponents();
   });
