@@ -1,7 +1,10 @@
 <div class="class-details-container" appCardStyle>
   <div class="class-details-header" appCardHeaderStyle>
     <div>Class Details</div>
-    <div class="header-actions">
+    <div
+      class="header-actions"
+      *ngIf="!(errorMessage$ | async) && (displayComponent$ | async)"
+    >
       <div class="edit-button" (click)="openModal('edit-class-modal')">
         <img title="Edit Class" src="assets/icons/Edit.svg" alt="Edit Class" />
       </div>
@@ -47,18 +50,36 @@
 <app-popup-modal id="edit-class-modal">
   <div headerContent>Edit Class</div>
   <div content>
-    <div class="edit-class-container">
+    <form [formGroup]="classDetailsForm" class="edit-class-container">
       <div class="edit-class-name">
         <div class="edit-label">Edit Class:</div>
-        <input type="text" [(ngModel)]="editclassName" />
+        <input type="text" formControlName="editedclassName" />
       </div>
       <div class="edit-class-description">
         <div class="edit-label">Edit Description:</div>
-        <textarea type="text" [(ngModel)]="editclassDescription"></textarea>
+        <textarea
+          type="text"
+          formControlName="editedclassDescription"
+        ></textarea>
       </div>
-    </div>
+    </form>
+
+    <ng-container
+      *ngIf="
+        errorMessagePopup !== null ||
+        editedclassName.value === '' ||
+        editedclassDescription.value === ''
+      "
+    >
+      <div class="errorBox">
+        <div class="errorMsg">
+          <img src="assets/icons/AlertSign.svg" alt="Error: " />
+          {{ errorMessagePopup || "Please fill all the fields" }}
+        </div>
+      </div>
+    </ng-container>
   </div>
-  <div footerContent>
+  <div footerContent class="buttons">
     <app-common-button
       [text]="'Cancel'"
       [variant]="'outlined'"
@@ -68,7 +89,7 @@
 
     <app-common-button
       [variant]="'filled'"
-      [disabled]="false"
+      [disabled]="isEnableEditButton()"
       [text]="'Update'"
       [bgColor]="'#268aff'"
       (BtnClickEmitter)="handleOnClickEvent($event, 'edit-class-modal')"

@@ -15,6 +15,7 @@ export class MyClassesEffects {
     private educateTeacherService: EducateTeacherService
   ) {}
 
+  // Class List
   loadClassList$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ClassListActions.loadClassList),
@@ -31,6 +32,7 @@ export class MyClassesEffects {
     )
   );
 
+  // Components
   loadComponents$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ClassListActions.setCurrentClass),
@@ -41,6 +43,7 @@ export class MyClassesEffects {
     )
   );
 
+  // Class Details
   loadClassDetails$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ClassDetailsActions.loadClassDetails),
@@ -59,6 +62,26 @@ export class MyClassesEffects {
     )
   );
 
+  updateClassDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ClassDetailsActions.updateClassDetails),
+      mergeMap(({ classDetails }) =>
+        this.educateTeacherService.updateClassDetails(classDetails).pipe(
+          mergeMap(() => [
+            ClassDetailsActions.updateClassDetailsSuccess({
+              classDetails: classDetails,
+            }),
+            ClassListActions.loadClassList(),
+          ]),
+          catchError((err: string) =>
+            of(ClassDetailsActions.updateClassDetailsFailure({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  // Resources
   loadResources$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ResourcesActions.loadResources),

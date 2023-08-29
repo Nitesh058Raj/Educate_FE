@@ -30,6 +30,7 @@ export class EducateTeacherService {
 
   constructor(private readonly http: HttpClient) {}
 
+  // School Details
   getSchoolDetails(): Observable<SchoolDetailsInterface[]> {
     return this.http
       .get<SchoolDetailsResponseInterface>(
@@ -41,6 +42,7 @@ export class EducateTeacherService {
       );
   }
 
+  // Announcements
   getAnnouncements(): Observable<AnnouncementsInterface[]> {
     return this.http
       .get<AnnouncementsResponseInterface>(
@@ -52,6 +54,7 @@ export class EducateTeacherService {
       );
   }
 
+  // Resources
   getResources(classId: number): Observable<ResourcesInterface[]> {
     return this.http
       .get<ResourcesResponseInterface>(
@@ -63,6 +66,7 @@ export class EducateTeacherService {
       );
   }
 
+  // Class List
   getClassList(): Observable<ClassInterface[]> {
     return this.http
       .get<ClassResponseInterface>(
@@ -74,6 +78,7 @@ export class EducateTeacherService {
       );
   }
 
+  // Class Details
   getClassDetails(classId: number): Observable<ClassDetailsInterface[]> {
     return this.http
       .get<ClassDetailsResponseInterface>(
@@ -85,6 +90,23 @@ export class EducateTeacherService {
       );
   }
 
+  updateClassDetails(classDetails: {
+    classId: number | null;
+    className: string;
+    classDescription: string;
+  }): Observable<any> {
+    return this.http
+      .put<ClassDetailsInterface>(
+        `http://localhost:5000/api/class/${classDetails.classId}`,
+        classDetails
+      )
+      .pipe(
+        map((response) => response),
+        catchError(this.handleError)
+      );
+  }
+
+  // Assignments
   getAssignmentCount(): Observable<AssignmentCountInterface[]> {
     return this.http
       .get<AssignmentCountResponseInterface>(
@@ -112,6 +134,7 @@ export class EducateTeacherService {
     );
   }
 
+  // Error Handler
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
     if (err.status == 0) {
