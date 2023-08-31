@@ -45,8 +45,8 @@ export interface ResourcesResponseInterface {
 export interface CreateClassDataInterface {
   className: string;
   classDescription: string;
-  teacherID: number;
-  schoolID: number;
+  teacherID: number | undefined;
+  schoolID: number | undefined;
 }
 
 export interface ClassInterface {
@@ -105,4 +105,12 @@ export interface LoginFormInterface {
   username: string;
   password: string;
   role: string;
+}
+
+export interface UserInterface {
+  userID: number;
+  username: string;
+  role: string;
+  id: number | undefined;
+  schoolID: number | undefined;
 }
