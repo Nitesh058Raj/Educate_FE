@@ -11,6 +11,7 @@ import { CardBodyStyleDirective } from './directives/CardStyle/card-body-style.d
 import { CardHeaderStyleDirective } from './directives/CardStyle/card-header-style.directive';
 import { CardStyleDirective } from './directives/CardStyle/card-style.directive';
 import { ModalService } from './services/modal-service/modal.service';
+import { UserService } from './services/user-service/user.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { ModalService } from './services/modal-service/modal.service';
     LoadingSpinnerComponent,
   ],
   imports: [CommonModule, FormsModule],
-  providers: [ModalService],
+  providers: [ModalService, UserService],
   exports: [
     LoginComponent,
     HeaderComponent,
