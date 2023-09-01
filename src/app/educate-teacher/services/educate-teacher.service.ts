@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable, map, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import {
   AnnouncementsInterface,
   AnnouncementsResponseInterface,
@@ -78,6 +79,20 @@ export class EducateTeacherService {
       );
   }
 
+  createNewClass(classsData: CreateClassDataInterface) {
+    return this.http.post('http://localhost:5000/api/class', classsData).pipe(
+      catchError(this.handleError),
+      map((response: any) => response)
+    );
+  }
+
+  deleteClass(classId: number) {
+    return this.http.delete(`http://localhost:5000/api/class/${classId}`).pipe(
+      catchError(this.handleError),
+      map((response: any) => response)
+    );
+  }
+
   // Class Details
   getClassDetails(classId: number): Observable<ClassDetailsInterface[]> {
     return this.http
@@ -101,8 +116,8 @@ export class EducateTeacherService {
         classDetails
       )
       .pipe(
-        map((response) => response),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        map((response) => response)
       );
   }
 
@@ -127,18 +142,15 @@ export class EducateTeacherService {
       catchError(this.handleError)
     );
 
-  createNewClass(classsData: CreateClassDataInterface) {
-    return this.http.post('http://localhost:5000/api/class', classsData).pipe(
-      map((response: any) => response),
-      catchError(this.handleError)
-    );
-  }
-
   // Error Handler
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage = '';
     if (err.status == 0) {
       errorMessage = `Unable to connect to the server. Please try again later.`;
+    } else if (err.status == 500) {
+      errorMessage = `${err.error.message}`; // `There is some problem with the service. Please try again later.
+    } else if (err.status == 409) {
+      errorMessage = `${err.error.message}`;
     } else {
       errorMessage = `There is some problem with the service. Please try again later.`;
     }
