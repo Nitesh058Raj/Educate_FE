@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -24,6 +25,9 @@ import { Actions } from '@ngrx/effects';
   styleUrls: ['./class-details.component.scss'],
 })
 export class ClassDetailsComponent implements OnInit, AfterContentChecked {
+  @ViewChild('form') form: any;
+
+  // class details variables
   displayComponent$: any;
   isLoading$: Observable<boolean> | undefined;
   errorMessage$: Observable<string | null> | null = null;
