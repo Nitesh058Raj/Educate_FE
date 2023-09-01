@@ -10,6 +10,7 @@ describe('My Classes Reducer', () => {
         loading: false,
         error: null,
         list: null,
+        popuperror: null,
       },
       classDetails: {
         loading: false,
@@ -38,6 +39,7 @@ describe('My Classes Reducer', () => {
         loading: false,
         error: null,
         list: null,
+        popuperror: null,
       },
       classDetails: {
         loading: false,
@@ -67,6 +69,7 @@ describe('My Classes Reducer', () => {
         loading: false,
         error: null,
         list: null,
+        popuperror: null,
       },
       classDetails: {
         loading: false,
@@ -97,6 +100,7 @@ describe('My Classes Reducer', () => {
         loading: false,
         error: null,
         list: null,
+        popuperror: null,
       },
       classDetails: {
         loading: false,

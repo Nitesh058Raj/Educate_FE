@@ -32,6 +32,40 @@ export class MyClassesEffects {
     )
   );
 
+  createCLass$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ClassListActions.createClass),
+      mergeMap(({ classData }) =>
+        this.educateTeacherService.createNewClass(classData).pipe(
+          mergeMap(() => [
+            ClassListActions.createClassSuccess(),
+            ClassListActions.loadClassList(),
+          ]),
+          catchError((err: string) =>
+            of(ClassListActions.createClassFailure({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  deleteClass$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ClassListActions.deleteClass),
+      mergeMap(({ classId }) =>
+        this.educateTeacherService.deleteClass(classId).pipe(
+          mergeMap(() => [
+            ClassListActions.deleteClassSuccess(),
+            ClassListActions.loadClassList(),
+          ]),
+          catchError((err: string) =>
+            of(ClassListActions.deleteClassFailure({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
   // Components
   loadComponents$ = createEffect(() =>
     this.actions$.pipe(

@@ -14,6 +14,7 @@ import { EducateTeacherModule } from './educate-teacher/educate-teacher.module';
 import { NotFoundRoutingModule } from './not-found/not-found-routing.module';
 import { NotFoundModule } from './not-found/not-found.module';
 import { SharedModule } from './shared/shared.module';
+import { userReducer } from './user-store/reducers/user.reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { SharedModule } from './shared/shared.module';
     NotFoundRoutingModule,
     SharedModule,
     StoreModule.forRoot({}, {}),
+    StoreModule.forFeature('user', userReducer),
     StoreDevtoolsModule.instrument({
       name: 'Educate Teacher App DevTools',
       maxAge: 25,

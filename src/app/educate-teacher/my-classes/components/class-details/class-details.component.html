@@ -50,16 +50,21 @@
 <app-popup-modal id="edit-class-modal">
   <div headerContent>Edit Class</div>
   <div content>
-    <form [formGroup]="classDetailsForm" class="edit-class-container">
+    <form
+      #form="ngForm"
+      [formGroup]="classDetailsForm"
+      class="edit-class-container"
+    >
       <div class="edit-class-name">
         <div class="edit-label">Edit Class:</div>
-        <input type="text" formControlName="editedclassName" />
+        <input type="text" formControlName="editedclassName" required />
       </div>
       <div class="edit-class-description">
         <div class="edit-label">Edit Description:</div>
         <textarea
           type="text"
           formControlName="editedclassDescription"
+          required
         ></textarea>
       </div>
     </form>

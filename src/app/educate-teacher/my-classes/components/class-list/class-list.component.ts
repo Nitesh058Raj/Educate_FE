@@ -1,12 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { EducateTeacherService } from 'src/app/educate-teacher/services/educate-teacher.service';
-import {
-  ClassInterface,
-  CreateClassDataInterface,
-} from 'src/app/models/common.model';
+import { ClassInterface } from 'src/app/models/common.model';
 import { ModalService } from 'src/app/shared/services/modal-service/modal.service';
+import { UserState } from 'src/app/user-store';
+import { UserSelectors } from 'src/app/user-store/selectors';
 import { State } from '../../state';
 import { ClassListActions } from '../../state/actions';
 import { ClassListSelectors } from '../../state/selectors';
@@ -16,29 +22,39 @@ import { ClassListSelectors } from '../../state/selectors';
   templateUrl: './class-list.component.html',
   styleUrls: ['./class-list.component.scss'],
 })
-export class ClassListComponent implements OnInit {
+export class ClassListComponent implements OnInit, AfterContentChecked {
   @ViewChild('form') form: any;
   classList$: Observable<ClassInterface[] | null> | undefined;
   isLoading$: Observable<boolean> | undefined;
   errorMessage$: Observable<string | null> | null = null;
   selectedClassId$: Observable<number | null> | undefined;
+  teacherId$: Observable<number | undefined> | undefined;
+  schoolId$: Observable<number | undefined> | undefined;
+  popUpError$: Observable<string | null> | undefined;
+
+  // temp vars
   tempClassId: number | null = null;
-  responseErrorMessage: string = '';
-  classFormData: CreateClassDataInterface = {
-    className: '',
-    classDescription: '',
-    schoolID: 1,
-    teacherID: 1,
-  };
+  tempteacherID: number | undefined;
+  tempSchoolId: number | undefined;
+
+  // form variables
+  className: FormControl | undefined;
+  classDescription: FormControl | undefined;
+  classDetailsForm!: FormGroup;
+  responseErrorMessage: string | null = null;
 
   constructor(
-    private educateTeacherService: EducateTeacherService,
     private modalService: ModalService,
-    private store: Store<State>
+    private store: Store<State>,
+    private userStore: Store<UserState>,
+    private action$: Actions,
+    private cdr: ChangeDetectorRef,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.store.dispatch(ClassListActions.loadClassList());
+
     this.isLoading$ = this.store.select(ClassListSelectors.getClassListLoading);
 
     this.classList$ = this.store.select(ClassListSelectors.getClassList);
@@ -54,6 +70,42 @@ export class ClassListComponent implements OnInit {
     this.selectedClassId$.subscribe((id) => {
       this.tempClassId = id;
     });
+
+    this.className = this.fb.control('');
+    this.classDescription = this.fb.control('');
+
+    this.classDetailsForm = this.fb.group({
+      className: this.className,
+      classDescription: this.classDescription,
+    });
+
+    this.teacherId$ = this.userStore.select(UserSelectors.getId);
+
+    this.teacherId$.subscribe((id) => {
+      this.tempteacherID = id;
+    });
+
+    this.schoolId$ = this.userStore.select(UserSelectors.getSchoolId);
+
+    this.schoolId$.subscribe((id) => {
+      this.tempSchoolId = id;
+    });
+
+    this.popUpError$ = this.store.select(
+      ClassListSelectors.getClassListPopupError
+    );
+
+    this.popUpError$.subscribe((error) => {
+      if (error) {
+        this.responseErrorMessage = error;
+      }
+    });
+
+    this.cdr.detectChanges();
+  }
+
+  ngAfterContentChecked() {
+    this.cdr.detectChanges();
   }
 
   onListBoxClick(id: number) {
@@ -65,38 +117,31 @@ export class ClassListComponent implements OnInit {
 
   resetClassForm() {
     this.form.resetForm(); // Reset form state and clear validity
-    this.responseErrorMessage = ''; // Clear the error message if any
-    this.classFormData = {
-      className: '',
-      classDescription: '',
-      schoolID: 1,
-      teacherID: 1,
-    };
+    this.responseErrorMessage = null; // Clear the error message if any
+    this.className?.setValue(''); // Reset the value of the form field
+    this.classDescription?.setValue(''); // Reset the value of the form field
   }
 
   submitClassForm(modalId: string) {
-    // Logic for API call to create new class
-    this.educateTeacherService
-      .createNewClass(this.classFormData)
-      .subscribe((response: any) => {
-        if (response.statusCode !== 201) {
-          this.handleResponseError(response);
-        } else {
-          this.closeModal(modalId); // Close the modal
-          this.resetClassForm(); // Reset the form
-          this.store.dispatch(ClassListActions.loadClassList()); // Load the class list again
-        }
-      });
-  }
+    this.store.dispatch(
+      ClassListActions.createClass({
+        classData: {
+          className: this.className?.value,
+          classDescription: this.classDescription?.value,
+          teacherID: this.tempteacherID,
+          schoolID: this.tempSchoolId,
+        },
+      })
+    );
 
-  handleResponseError(response: any) {
-    if (response.statusCode === 409) {
-      this.responseErrorMessage = response.message;
-      // Clear the error message after 5 seconds
-      setTimeout(() => {
-        this.responseErrorMessage = '';
-      }, 5000);
-    }
+    this.action$.subscribe((data: any) => {
+      if (data.type === '[Class List] Create Class Success') {
+        this.resetClassForm();
+        this.closeModal(modalId);
+      } else if (data.type === '[Class List] Create Class Failure') {
+        this.responseErrorMessage = data.error;
+      }
+    });
   }
 
   openModal(id: string) {
@@ -117,9 +162,18 @@ export class ClassListComponent implements OnInit {
         this.submitClassForm(modalId);
         break;
       case 'Remove':
-        // TODO: Write logic for calling the API of removing Class
+        this.store.dispatch(
+          ClassListActions.deleteClass({ classId: this.tempClassId! })
+        );
 
-        this.closeModal(modalId);
+        this.action$.subscribe((data: any) => {
+          if (data.type === '[Class List] Delete Class Success') {
+            this.closeModal(modalId);
+          } else if (data.type === '[Class List] Delete Class Failure') {
+            this.responseErrorMessage = data.error;
+          }
+        });
+
         break;
       default:
         break;
