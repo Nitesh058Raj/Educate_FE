@@ -11,6 +11,7 @@ describe('My Classes Selectors', () => {
           ],
           loading: false,
           error: null,
+          popuperror: null,
         },
       },
     };

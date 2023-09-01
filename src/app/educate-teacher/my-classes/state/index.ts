@@ -3,7 +3,7 @@ import {
   ClassInterface,
   ResourcesInterface,
 } from 'src/app/models/common.model';
-import * as AppState from '../../../state/app.state';
+import * as AppState from '../../../store/app.state';
 
 // strong Typing the state
 // for lazy loading we need to extend the app state
@@ -18,6 +18,7 @@ export interface MyClassesState {
     loading: boolean;
     error: string | null;
     list: ClassInterface[] | null;
+    popuperror: string | null;
   };
   classDetails: {
     loading: boolean;

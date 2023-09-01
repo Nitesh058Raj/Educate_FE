@@ -30,3 +30,8 @@ export const getDisplayComponent = createSelector(
   getMyClassesFeatureState,
   (state) => state.displayComponent
 );
+
+export const getClassListPopupError = createSelector(
+  getMyClassesFeatureState,
+  (state) => state.classList.popuperror
+);

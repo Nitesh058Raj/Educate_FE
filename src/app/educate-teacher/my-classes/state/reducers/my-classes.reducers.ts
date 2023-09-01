@@ -14,7 +14,8 @@ const initialState: MyClassesState = {
   classList: {
     loading: false,
     error: null,
-    list: null,
+    list: [],
+    popuperror: null,
   },
   classDetails: {
     loading: false,
@@ -57,9 +58,10 @@ export const myClassesReducer = createReducer<MyClassesState>(
       ...state,
       displayComponent: false,
       classList: {
-        list: null,
+        list: [],
         loading: false,
         error: action.error,
+        popuperror: null,
       },
     };
   }),
@@ -72,6 +74,60 @@ export const myClassesReducer = createReducer<MyClassesState>(
         ...state.classDetails,
         details: null,
         error: null,
+      },
+    };
+  }),
+  on(ClassListActions.createClass, (state): MyClassesState => {
+    return {
+      ...state,
+      classList: {
+        ...state.classList,
+        popuperror: null,
+      },
+    };
+  }),
+  on(ClassListActions.createClassSuccess, (state): MyClassesState => {
+    return {
+      ...state,
+      classList: {
+        ...state.classList,
+      },
+    };
+  }),
+  on(ClassListActions.createClassFailure, (state, action): MyClassesState => {
+    return {
+      ...state,
+      classList: {
+        ...state.classList,
+        popuperror: action.error,
+      },
+    };
+  }),
+  on(ClassListActions.deleteClass, (state): MyClassesState => {
+    return {
+      ...state,
+      classList: {
+        ...state.classList,
+        popuperror: null,
+      },
+    };
+  }),
+  on(ClassListActions.deleteClassSuccess, (state): MyClassesState => {
+    return {
+      ...state,
+      selectedClassId: null,
+      displayComponent: false,
+      classList: {
+        ...state.classList,
+      },
+    };
+  }),
+  on(ClassListActions.deleteClassFailure, (state, action): MyClassesState => {
+    return {
+      ...state,
+      classList: {
+        ...state.classList,
+        popuperror: action.error,
       },
     };
   }),
