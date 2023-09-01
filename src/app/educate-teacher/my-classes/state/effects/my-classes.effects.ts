@@ -97,4 +97,38 @@ export class MyClassesEffects {
       )
     )
   );
+
+  addResource$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ResourcesActions.addResource),
+      mergeMap(({ resource }) =>
+        this.educateTeacherService.createNewResource(resource).pipe(
+          mergeMap(() => [
+            ResourcesActions.addResourceSuccess(),
+            ResourcesActions.loadResources({ classId: resource.classID }),
+          ]),
+          catchError((err: string) =>
+            of(ResourcesActions.addResourceFailure({ error: err }))
+          )
+        )
+      )
+    )
+  );
+
+  deleteResource$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ResourcesActions.deleteResource),
+      mergeMap(({ resourceId, classId }) =>
+        this.educateTeacherService.deleteResource(resourceId).pipe(
+          mergeMap(() => [
+            ResourcesActions.deleteResourceSuccess(),
+            ResourcesActions.loadResources({ classId: classId }),
+          ]),
+          catchError((err: string) =>
+            of(ResourcesActions.deleteResourceFailure({ error: err }))
+          )
+        )
+      )
+    )
+  );
 }

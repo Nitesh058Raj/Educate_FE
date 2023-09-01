@@ -25,6 +25,7 @@ const initialState: MyClassesState = {
     loading: false,
     error: null,
     list: [],
+    selectedResourceId: null,
   },
 };
 
@@ -158,6 +159,7 @@ export const myClassesReducer = createReducer<MyClassesState>(
         ...state.resources,
         loading: true,
         error: null,
+        selectedResourceId: null,
       },
     };
   }),
@@ -178,7 +180,84 @@ export const myClassesReducer = createReducer<MyClassesState>(
         list: [],
         loading: false,
         error: action.error,
+        selectedResourceId: null,
       },
     };
-  })
+  }),
+
+  on(ResourcesActions.addResource, (state): MyClassesState => {
+    return {
+      ...state,
+      resources: {
+        ...state.resources,
+        loading: true,
+        error: null,
+      },
+    };
+  }),
+  on(ResourcesActions.addResourceSuccess, (state): MyClassesState => {
+    return {
+      ...state,
+      resources: {
+        ...state.resources,
+        loading: false,
+        error: null,
+      },
+    };
+  }),
+  on(ResourcesActions.addResourceFailure, (state, action): MyClassesState => {
+    return {
+      ...state,
+      resources: {
+        ...state.resources,
+        loading: false,
+        error: action.error,
+      },
+    };
+  }),
+  on(ResourcesActions.deleteResource, (state): MyClassesState => {
+    return {
+      ...state,
+      resources: {
+        ...state.resources,
+        loading: true,
+        error: null,
+      },
+    };
+  }),
+  on(ResourcesActions.deleteResourceSuccess, (state): MyClassesState => {
+    return {
+      ...state,
+      resources: {
+        ...state.resources,
+        loading: false,
+        error: null,
+      },
+    };
+  }),
+  on(
+    ResourcesActions.deleteResourceFailure,
+    (state, action): MyClassesState => {
+      return {
+        ...state,
+        resources: {
+          ...state.resources,
+          loading: false,
+          error: action.error,
+        },
+      };
+    }
+  ),
+  on(
+    ResourcesActions.setSelectedResourceId,
+    (state, action): MyClassesState => {
+      return {
+        ...state,
+        resources: {
+          ...state.resources,
+          selectedResourceId: action.resourceId,
+        },
+      };
+    }
+  )
 );

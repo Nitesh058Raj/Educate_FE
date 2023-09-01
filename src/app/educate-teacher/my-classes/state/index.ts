@@ -28,5 +28,6 @@ export interface MyClassesState {
     loading: boolean;
     error: string | null;
     list: ResourcesInterface[];
+    selectedResourceId: number | null;
   };
 }

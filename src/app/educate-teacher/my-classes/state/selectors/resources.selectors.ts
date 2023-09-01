@@ -20,3 +20,8 @@ export const getError = createSelector(
   getMyClassesFeatureState,
   (state) => state.resources.error
 );
+
+export const getSelectedResourceId = createSelector(
+  getMyClassesFeatureState,
+  (state) => state.resources.selectedResourceId
+);
