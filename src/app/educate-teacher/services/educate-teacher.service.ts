@@ -13,6 +13,7 @@ import {
   ClassInterface,
   ClassResponseInterface,
   CreateClassDataInterface,
+  ResourceCreateInterface,
   ResourcesInterface,
   ResourcesResponseInterface,
   SchoolDetailsInterface,
@@ -63,6 +64,24 @@ export class EducateTeacherService {
       .pipe(
         map((response) => response.data),
         catchError(this.handleError)
+      );
+  }
+
+  createNewResource(resourceData: ResourceCreateInterface) {
+    return this.http
+      .post('http://localhost:5000/api/resource', resourceData)
+      .pipe(
+        catchError(this.handleError),
+        map((response: any) => response)
+      );
+  }
+
+  deleteResource(resourceId: number) {
+    return this.http
+      .delete(`http://localhost:5000/api/resource/${resourceId}`)
+      .pipe(
+        catchError(this.handleError),
+        map((response: any) => response)
       );
   }
 
