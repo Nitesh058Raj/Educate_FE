@@ -42,6 +42,12 @@ export interface ResourcesResponseInterface {
   data: ResourcesInterface[];
 }
 
+export interface ResourceCreateInterface {
+  classID: number;
+  resourceName: string;
+  resourceUrl: string;
+}
+
 export interface CreateClassDataInterface {
   className: string;
   classDescription: string;
