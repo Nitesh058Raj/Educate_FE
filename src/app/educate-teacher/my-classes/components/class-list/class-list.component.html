@@ -1,11 +1,18 @@
 <div class="class-list-container" appCardStyle="36px 0 0 36px">
   <div class="class-list-header" appCardHeaderStyle>
     <div>My Classes</div>
-    <div class="header-actions">
+    <div
+      class="header-actions"
+      *ngIf="!((errorMessage$ | async) || (isLoading$ | async))"
+    >
       <div class="action-button" (click)="openModal('add-class-modal')">
         <img title="Add Class" src="assets/icons/Plus.svg" alt="Add Class" />
       </div>
-      <div class="action-button" (click)="openModal('remove-class-modal')">
+      <div
+        *ngIf="selectedClassId$ | async"
+        class="action-button"
+        (click)="openModal('remove-class-modal')"
+      >
         <img
           title="Remove Class"
           src="assets/icons/Minus.svg"
@@ -23,9 +30,9 @@
         <app-loading-spinner></app-loading-spinner>
       </div>
       <ng-template #classList>
-        <div *ngIf="classList$ | async as classList; else errorBox">
+        <div *ngIf="(classList$ | async)?.length; else noClassBox">
           <ul class="list">
-            <li class="list-item" *ngFor="let class of classList">
+            <li class="list-item" *ngFor="let class of classList$ | async">
               <div
                 class="list-box"
                 [class.selected-list-box]="
@@ -40,6 +47,9 @@
         </div>
       </ng-template>
     </div>
+    <ng-template #noClassBox>
+      <div class="no-class">No classes added.</div>
+    </ng-template>
     <ng-template #errorBox>
       <p class="errorBox" *ngIf="errorMessage$ | async as errorMessage">
         <img src="assets/icons/ErrorCross.svg" alt="error" />
@@ -52,14 +62,14 @@
 <app-popup-modal id="add-class-modal">
   <div headerContent>Add Class</div>
   <div content>
-    <form #form="ngForm">
+    <form #form="ngForm" [formGroup]="classDetailsForm">
       <div class="add-class-container">
         <div class="add-class-name">
           <div class="class-label">Class name:</div>
           <input
             type="text"
             name="className"
-            [(ngModel)]="classFormData.className"
+            formControlName="className"
             required
           />
         </div>
@@ -67,11 +77,11 @@
           <div class="class-label">Class description:</div>
           <textarea
             name="classDescription"
-            [(ngModel)]="classFormData.classDescription"
+            formControlName="classDescription"
             required
           ></textarea>
         </div>
-        <div [hidden]="responseErrorMessage === ''" class="alert-invalid">
+        <div [hidden]="responseErrorMessage === null" class="alert-invalid">
           <div class="errorMsg">
             <img src="assets/icons/AlertSign.svg" alt="alert" />
             {{ responseErrorMessage }}
@@ -88,7 +98,7 @@
 
         <app-common-button
           [variant]="'filled'"
-          [disabled]="form.invalid"
+          [disabled]="form.invalid || responseErrorMessage !== null"
           [text]="'Submit'"
           [bgColor]="'#268aff'"
           (BtnClickEmitter)="handleOnClickEvent($event, 'add-class-modal')"
@@ -102,7 +112,15 @@
   <div headerContent>Remove Class</div>
   <div content>
     <div class="remove-class-container">
-      Are you sure you want to remove the class?
+      <div class="remove-text-msg">
+        Are you sure you want to remove the class?
+      </div>
+      <div [hidden]="responseErrorMessage === null" class="alert-invalid">
+        <div class="errorMsg">
+          <img src="assets/icons/AlertSign.svg" alt="alert" />
+          {{ responseErrorMessage }}
+        </div>
+      </div>
     </div>
   </div>
   <div footerContent>

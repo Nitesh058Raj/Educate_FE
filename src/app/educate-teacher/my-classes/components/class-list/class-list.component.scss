@@ -96,9 +96,27 @@ app-popup-modal {
   display: none;
 
   .remove-class-container {
-    margin: 20px 10px;
+    margin: 20px 20px;
     font-family: "Karla";
     font-size: 24px;
+
+    .remove-text-msg {
+      margin-bottom: 10px;
+    }
+
+    .alert-invalid {
+      .errorMsg {
+        display: flex;
+        align-items: center;
+        color: #ff004c;
+        font-size: 20px;
+        font-family: "Karla";
+        margin-top: 5px;
+        img {
+          margin-right: 5px;
+        }
+      }
+    }
   }
 
   .add-class-container {
