@@ -1,7 +1,7 @@
 <div class="resources-container" appCardStyle>
   <div class="resources-header" appCardHeaderStyle>
     <div>Resources</div>
-    <div class="header-actions">
+    <div *ngIf="displayComponent$ | async" class="header-actions">
       <div class="action-button" (click)="openModal('add-resource-modal')">
         <img
           title="Add Resource"
@@ -9,7 +9,11 @@
           alt="Add Resource"
         />
       </div>
-      <div class="action-button" (click)="openModal('remove-resource-modal')">
+      <div
+        *ngIf="selectedResourceId$ | async"
+        class="action-button"
+        (click)="openModal('remove-resource-modal')"
+      >
         <img
           title="Remove Resource"
           src="assets/icons/Minus.svg"
@@ -38,13 +42,16 @@
           class="resources-content"
           *ngIf="(resources$ | async)?.length; else noResourcesBox"
         >
-          <div class="resource" *ngFor="let resource of resources$ | async">
-            <a
-              class="resource-name"
-              [href]="resource.resourceUrl"
+          <div class="resources" *ngFor="let resource of resources$ | async">
+            <div
+              class="resource no-select"
+              [class.selected-resource]="resource.resourceID === tempResourceId"
               target="_blank"
-              >{{ resource.resourceName }}</a
+              (dblclick)="openInNewTab(resource.resourceUrl)"
+              (click)="selectResource($event, resource.resourceID)"
             >
+              <div class="resource-name">{{ resource.resourceName }}</div>
+            </div>
           </div>
         </div>
       </ng-template>
@@ -64,13 +71,18 @@
 <app-popup-modal id="add-resource-modal">
   <div headerContent>Add Resource</div>
   <div content>
-    <div class="add-resource-container">
+    <form
+      #form="ngForm"
+      [formGroup]="resourceForm"
+      class="add-resource-container"
+    >
       <div class="add-resource">
         <div class="title">Name:</div>
         <input
           type="text"
           placeholder="Enter Resource Name..."
-          [(ngModel)]="addResourceName"
+          formControlName="addResourceName"
+          required
         />
       </div>
       <br />
@@ -79,10 +91,16 @@
         <input
           type="text"
           placeholder="Enter Resource Link..."
-          [(ngModel)]="addResourceURL"
+          formControlName="addResourceURL"
+          required
         />
       </div>
-    </div>
+      <br />
+      <div *ngIf="popupErrorMessage !== null" class="errorBox">
+        <img src="assets/icons/AlertSign.svg" alt="error" />
+        {{ popupErrorMessage }}
+      </div>
+    </form>
   </div>
   <div footerContent>
     <app-common-button
@@ -93,9 +111,9 @@
     ></app-common-button>
 
     <app-common-button
-      [variant]="'filled'"
-      [disabled]="false"
       [text]="'Add'"
+      [variant]="'filled'"
+      [disabled]="form.invalid || popupErrorMessage !== null"
       [bgColor]="'#268aff'"
       (BtnClickEmitter)="handleOnClickEvent($event, 'add-resource-modal')"
     ></app-common-button>
@@ -107,6 +125,10 @@
   <div content>
     <div class="remove-resource-container">
       Are you sure you want to remove the resource?
+      <div *ngIf="popupErrorMessage !== null" class="errorBox">
+        <img src="assets/icons/AlertSign.svg" alt="error" />
+        {{ popupErrorMessage }}
+      </div>
     </div>
   </div>
   <div footerContent>

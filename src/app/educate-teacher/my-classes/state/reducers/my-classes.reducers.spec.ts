@@ -21,6 +21,7 @@ describe('My Classes Reducer', () => {
         loading: false,
         error: null,
         list: [],
+        selectedResourceId: null,
       },
     };
     const action = ClassListActions.loadClassList();
@@ -50,6 +51,7 @@ describe('My Classes Reducer', () => {
         loading: false,
         error: null,
         list: [],
+        selectedResourceId: null,
       },
     };
     const classList = [{ classID: 1, className: 'Class A' }];
@@ -80,6 +82,7 @@ describe('My Classes Reducer', () => {
         loading: false,
         error: null,
         list: [],
+        selectedResourceId: null,
       },
     };
     const error = 'An error occurred';
@@ -111,6 +114,7 @@ describe('My Classes Reducer', () => {
         loading: false,
         error: null,
         list: [],
+        selectedResourceId: null,
       },
     };
     const classId = 123;
